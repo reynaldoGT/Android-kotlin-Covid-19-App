@@ -16,6 +16,13 @@
 
         android:orientation="vertical">
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerImageSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="80dp"
+            android:paddingEnd="80dp" />
+
         <TextView
             android:id="@+id/ttvTitulo"
             android:layout_width="match_parent"
@@ -81,6 +88,6 @@
                 android:drawableLeft="@drawable/ic_message"
                 android:text="@string/message" />
         </LinearLayout>
-    </LinearLayout>
 
+    </LinearLayout>
 </FrameLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Inicio">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/backgroud_main"
+        android:paddingBottom="25dp"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ttvTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="35dp"
+            android:text="@string/title"
+            android:textColor="#fff"
+            android:textSize="35dp" />
+
+        <TextView
+            android:id="@+id/tvsubTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:layout_marginBottom="16dp"
+            android:text="@string/sick"
+            />
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="32dp"
+            android:textColor="#fff"
+            android:lineHeight="23dp"
+            android:text="@string/parrafo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/btnCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_red"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#fff"
+                android:layout_marginRight="20dp"
+                android:drawableLeft="@drawable/ic_call"
+                android:textSize="13dp"
+                android:text="@string/call" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_blue"
+                android:layout_weight="1"
+                android:textColor="#fff"
+                android:textSize="13dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+
+                android:drawableLeft="@drawable/ic_message"
+                android:text="@string/message" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

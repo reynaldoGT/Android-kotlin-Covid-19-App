@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Covid19Ciudados</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+<!--Strigns del incio-->
+    <string name="title"><b>Covid-19</b> </string>
+    <string name="sick"><b>¿ Te sientes enfermo ?</b> </string>
+    <string name="parrafo">Si te sientes enfermo o tienes sintomaas de covid-19 por favor llama o envianos un mensaje e iremos inmediatamente para ayudar </string>
+    <string name="call">LLamar ahora</string>
+    <string name="message">Enviar Mensaje</string>
+</resources>

@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="16dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -103,9 +104,12 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerImageSlider"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="80dp"
-            android:paddingEnd="80dp" />
+            android:layout_height="170dp"
+            android:paddingStart="70dp"
+            android:paddingEnd="70dp"
+            android:layout_marginBottom="16dp"
+            />
+
     </LinearLayout>
 
 </FrameLayout>

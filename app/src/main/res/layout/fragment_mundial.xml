@@ -3,13 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".Fragments.Mundial">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        android:text="Eso pasa en el mundo" />
+        <TextView
+            android:id="@+id/tvc19title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:text="Csos en el Mundo" />
 
+
+        <GridView
+            android:id="@+id/gridInfo"
+            android:layout_width="match_parent"
+            android:numColumns="2"
+            android:horizontalSpacing="16dp"
+            android:verticalSpacing="16dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </FrameLayout>

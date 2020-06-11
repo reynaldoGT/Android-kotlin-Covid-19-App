@@ -3,6 +3,7 @@ package com.example.covid19ciudados
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.makeramen.roundedimageview.RoundedImageView
@@ -18,7 +19,7 @@ class SliderApapter(sliderItems:ArrayList<SliderItem>,viewPager2 : ViewPager2,va
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderAdapterHolder {
-        val vista = LayoutInflater.from(parent.context).inflate(R.layout.slide_item_contaiener, parent, false)
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.slide_item_container, parent, false)
         var viewHolder = SliderAdapterHolder(vista,listener)
         return viewHolder
     }
@@ -35,9 +36,11 @@ class SliderApapter(sliderItems:ArrayList<SliderItem>,viewPager2 : ViewPager2,va
     class SliderAdapterHolder( vista: View,listener: ClickListener) :RecyclerView.ViewHolder(vista),View.OnClickListener{
         var vista = vista
         var listener: ClickListener? = null
+        var description :TextView?=null
         var imageView: RoundedImageView? = null
         init {
             imageView = vista.findViewById(R.id.imageslide)
+            description = vista.findViewById(R.id.textSlide)
             // establecer evento click
             this.listener = listener
             vista.setOnClickListener(this)

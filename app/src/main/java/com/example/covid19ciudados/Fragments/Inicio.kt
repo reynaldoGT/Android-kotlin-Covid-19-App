@@ -36,20 +36,20 @@ class Inicio : Fragment() {
 
         var sliderItem: ArrayList<SliderItem> = ArrayList()
 
-        sliderItem.add(SliderItem(R.drawable.stayhome))
-        sliderItem.add(SliderItem(R.drawable.cough))
-        sliderItem.add(SliderItem(R.drawable.antibacterialgel))
-        sliderItem.add(SliderItem(R.drawable.distance))
-        sliderItem.add(SliderItem(R.drawable.handshake))
-        sliderItem.add(SliderItem(R.drawable.greeting))
-        sliderItem.add(SliderItem(R.drawable.facemask))
-        sliderItem.add(SliderItem(R.drawable.washinghands))
-        sliderItem.add(SliderItem(R.drawable.hearse))
-        sliderItem.add(SliderItem(R.drawable.mask))
+        sliderItem.add(SliderItem(R.drawable.stayhome,"Quédate en casa"))
+        sliderItem.add(SliderItem(R.drawable.cough,"Tapate al toser"))
+        sliderItem.add(SliderItem(R.drawable.antibacterialgel,"Usa gel antibacterial"))
+        sliderItem.add(SliderItem(R.drawable.distance,"Toma distancia social"))
+        sliderItem.add(SliderItem(R.drawable.handshake,"No saludes con la mano"))
+        sliderItem.add(SliderItem(R.drawable.greeting,"Trata de saluda con los codos"))
+        sliderItem.add(SliderItem(R.drawable.facemask,"Usa barbijo o mascarilla"))
+        sliderItem.add(SliderItem(R.drawable.washinghands,"Lavate las manos frecuentemente"))
+        sliderItem.add(SliderItem(R.drawable.hearse,"Si te sientes mal pide ayuda"))
+        sliderItem.add(SliderItem(R.drawable.mask,"Sal siempre con barbijo o mascarilla"))
 
         viewPager2?.adapter = SliderApapter(sliderItem, viewPager2!!,object :ClickListener{
             override fun onclick(vista: View, index: Int) {
-                Toast.makeText(activity?.applicationContext, "Holi desde aqui prros", Toast.LENGTH_SHORT)
+                Toast.makeText(activity?.applicationContext, sliderItem[index].desc, Toast.LENGTH_LONG)
                     .show()
             }
 

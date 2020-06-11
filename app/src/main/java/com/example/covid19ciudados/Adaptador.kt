@@ -36,16 +36,18 @@ class Adaptador(var context: Context, items: ArrayList<Card>) : BaseAdapter() {
         when(position){
             0->{
                 vista?.setBackgroundColor(Color.parseColor("#ffb259"))
-                    vista?.setBackgroundResource(R.drawable.border_no_color)
+                    vista?.setBackgroundResource(R.drawable.card_cyan)
             }
             1->{
-                vista?.setBackgroundColor(Color.parseColor("#ff5959"))
+                vista?.setBackgroundResource(R.drawable.card_green)
+
             }
             2->{
-                vista?.setBackgroundColor(Color.parseColor("#4cd97b"))
+                vista?.setBackgroundResource(R.drawable.card_red)
+
             }
             3->{
-                vista?.setBackgroundColor(Color.parseColor("#4cb5ff"))
+                vista?.setBackgroundResource(R.drawable.card_orange)
             }
         }
 

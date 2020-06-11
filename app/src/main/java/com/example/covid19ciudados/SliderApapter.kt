@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.makeramen.roundedimageview.RoundedImageView
 
-class SliderApapter(sliderItems:ArrayList<SliderItem>,viewPager2 : ViewPager2)
+class SliderApapter(sliderItems:ArrayList<SliderItem>,viewPager2 : ViewPager2,var listener: ClickListener)
 :RecyclerView.Adapter<SliderApapter.SliderAdapterHolder>(){
 
     var sliderItems: ArrayList<SliderItem>? = null
@@ -19,7 +19,7 @@ class SliderApapter(sliderItems:ArrayList<SliderItem>,viewPager2 : ViewPager2)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderAdapterHolder {
         val vista = LayoutInflater.from(parent.context).inflate(R.layout.slide_item_contaiener, parent, false)
-        var viewHolder = SliderAdapterHolder(vista)
+        var viewHolder = SliderAdapterHolder(vista,listener)
         return viewHolder
     }
 
@@ -32,15 +32,25 @@ class SliderApapter(sliderItems:ArrayList<SliderItem>,viewPager2 : ViewPager2)
         holder.setImage(sliderItems?.get(position)!!)
     }
 
-    class SliderAdapterHolder( vista: View) :RecyclerView.ViewHolder(vista){
+    class SliderAdapterHolder( vista: View,listener: ClickListener) :RecyclerView.ViewHolder(vista),View.OnClickListener{
         var vista = vista
+        var listener: ClickListener? = null
         var imageView: RoundedImageView? = null
         init {
             imageView = vista.findViewById(R.id.imageslide)
+            // establecer evento click
+            this.listener = listener
+            vista.setOnClickListener(this)
         }
         fun setImage(sliderItem:SliderItem){
             imageView?.setImageResource(sliderItem.image)
         }
 
+        override fun onClick(v: View?) {
+            this.listener?.onclick(v!!, adapterPosition)
+        }
+
+
     }
+
 }

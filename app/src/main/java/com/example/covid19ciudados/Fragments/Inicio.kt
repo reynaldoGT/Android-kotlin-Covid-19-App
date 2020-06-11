@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -14,6 +15,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.covid19ciudados.ClickListener
 import com.example.covid19ciudados.R
 import com.example.covid19ciudados.SliderApapter
 import com.example.covid19ciudados.SliderItem
@@ -45,7 +47,13 @@ class Inicio : Fragment() {
         sliderItem.add(SliderItem(R.drawable.hearse))
         sliderItem.add(SliderItem(R.drawable.mask))
 
-        viewPager2?.adapter = SliderApapter(sliderItem, viewPager2!!)
+        viewPager2?.adapter = SliderApapter(sliderItem, viewPager2!!,object :ClickListener{
+            override fun onclick(vista: View, index: Int) {
+                Toast.makeText(activity?.applicationContext, "Holi desde aqui prros", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        })
 
         viewPager2?.clipToPadding = false
         viewPager2?.clipChildren = false

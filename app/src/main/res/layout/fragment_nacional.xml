@@ -3,10 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?attr/actionBarSize"
-    tools:context=".Fragments.Mundial">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.Nacional">
 
+
+    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -24,7 +27,7 @@
                 android:id="@+id/tvc19title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Casos en el Mundo"
+                android:text="Casos en Bolivia"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:textColor="#fff"
@@ -38,7 +41,6 @@
                 android:numColumns="2"
                 android:verticalSpacing="16dp" />
 
-
             <TextView
                 android:id="@+id/tvFecha"
                 android:layout_width="match_parent"
@@ -48,9 +50,7 @@
                 android:layout_marginBottom="16dp"
                 android:textColor="#fff"
                 android:textSize="12dp" />
-
         </LinearLayout>
-
     </LinearLayout>
 
 </FrameLayout>

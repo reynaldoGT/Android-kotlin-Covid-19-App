@@ -5,6 +5,17 @@
     android:fitsSystemWindows="true"
     android:layout_height="match_parent" >
 
+<androidx.appcompat.widget.Toolbar
+    app:titleTextColor="#fff"
+    android:id="@+id/toolba"
+
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+    android:elevation="0.1dp"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    />
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -16,9 +27,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:itemTextColor="#ffffff"
-        app:itemIconTint="#fff"
-        android:background="@color/colorPrimary"
+        app:itemTextColor="@drawable/selector_bottombar_text"
+        app:itemIconTint="@drawable/selector_bottombar_text"
+
+
+
         app:menu="@menu/menu_botton"
     />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,12 +4,18 @@
     <item
         android:id="@+id/page_1"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_4k_24"
-        android:title="Primero titutlo"
+        android:icon="@drawable/i_home"
+
+        android:title="Prevenciones"
          />
     <item
         android:id="@+id/page_2"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_4k_24"
-        android:title="segundo tipo"/>
+        android:icon="@drawable/i_globe"
+        android:title="Mundo"/>
+    <item
+        android:id="@+id/page_3"
+        android:enabled="true"
+        android:icon="@drawable/i_flag"
+        android:title="Bolivia"/>
 </menu>

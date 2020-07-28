@@ -14,25 +14,18 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.covid19ciudados.Adaptador
 import com.example.covid19ciudados.Card
+import com.example.covid19ciudados.departamentos.DepartamentosInfo
 import com.example.covid19ciudados.R
+import com.example.covid19ciudados.departamentos.AdaptadorDepartamento
 import com.example.covid19ciudados.information.GlobalInfomation
 import com.google.gson.Gson
-import java.text.DateFormat
+import kotlinx.android.synthetic.main.fragment_nacional.*
+
 import java.text.DecimalFormat
-import java.text.SimpleDateFormat
-import java.util.*
+
 import kotlin.collections.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Nacional.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Nacional : Fragment() {
 
 
@@ -44,6 +37,8 @@ class Nacional : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_nacional, container, false)
         consultarDatos()
+
+        consultarDatosDepartamentos()
         return view
 
 
@@ -58,12 +53,10 @@ class Nacional : Fragment() {
         val solicitud =
             StringRequest(Request.Method.GET, URL, Response.Listener<String> { response ->
                 try {
-//                    Log.d("solicitud por volley", response)
-                    //usando la libreria gson para parsear
                     val gson = Gson()
                     val c19 = gson.fromJson(response, GlobalInfomation::class.java)
 
-                    Log.d("Pais", c19.Countries[20].Country)
+/*Log.d("Pais", c19.Countries[20].Country)*/
 
                     val dec = DecimalFormat("#,###")
                     var cards = ArrayList<Card>()
@@ -82,6 +75,54 @@ class Nacional : Fragment() {
 
                     val adaptor = Adaptador(activity!!.applicationContext, cards)
                     grid?.adapter = adaptor
+
+
+                } catch (e: Exception) {
+                    Log.d("error en la peticion", e.message)
+                }
+            }, Response.ErrorListener { error ->
+                Log.d("Error en el listener", error.message.toString())
+
+            })
+        queue.add(solicitud)
+
+    }
+
+    private fun consultarDatosDepartamentos() {
+
+        val URL =
+            "https://mauforonda.github.io/covid19-bolivia/data.json"
+        val queue = Volley.newRequestQueue(activity?.applicationContext)
+
+        val solicitud =
+            StringRequest(Request.Method.GET, URL, Response.Listener<String> { response ->
+                try {
+//                    Log.d("solicitud por volley", response)
+                    //usando la libreria gson para parsear
+                    val gson = Gson()
+                    val departamentosInfo = gson.fromJson(response, DepartamentosInfo::class.java)
+
+
+                    //Log.d("la paz","en al paz hay lapaz ${departamentosInfo.confirmados[1].dep.potosí}")
+
+                    var cards = ArrayList<Card>()
+                    //c19.Global.TotalConfirmed.toString()
+                    cards.add(Card("La paz", departamentosInfo.confirmados[0].dep.la_paz.toString()) )
+                    cards.add(Card("Oruro", departamentosInfo.confirmados[0].dep.oruro.toString()))
+                    cards.add(Card("Potosi", departamentosInfo.confirmados[0].dep.potosí.toString()))
+
+                    cards.add(Card("Cochabamba", departamentosInfo.confirmados[0].dep.cochabamba.toString()) )
+                    cards.add(Card("Tarija", departamentosInfo.confirmados[0].dep.tarija.toString()))
+                    cards.add(Card("Chuquisaca", departamentosInfo.confirmados[0].dep.chuquisaca.toString()))
+
+                    cards.add(Card("Santa Cruz", departamentosInfo.confirmados[0].dep.santa_cruz.toString()) )
+                    cards.add(Card("Beni", departamentosInfo.confirmados[0].dep.beni.toString()))
+                    cards.add(Card("Pando", departamentosInfo.confirmados[0].dep.pando.toString()))
+
+
+                    val adaptador = AdaptadorDepartamento(activity!!.applicationContext, cards)
+
+                    lvDepartamentos.adapter = adaptador
 
 
                 } catch (e: Exception) {

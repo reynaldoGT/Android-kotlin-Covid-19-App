@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.example.covid19ciudados.Card
+
 import com.example.covid19ciudados.R
 
-class AdaptadorDepartamento (var context: Context, items : ArrayList<Card>) : BaseAdapter(){
+class AdaptadorDepartamento (var context: Context, items : ArrayList<CardDepartamento>) : BaseAdapter(){
 
-    var items :ArrayList<Card>? =null
+    var items :ArrayList<CardDepartamento>? =null
 
     init{
         this.items = items
@@ -28,9 +28,10 @@ class AdaptadorDepartamento (var context: Context, items : ArrayList<Card>) : Ba
         }else{
             holder=vista.tag as? ViewHolder
         }
-        var item = getItem(position) as Card
+        val item = getItem(position) as CardDepartamento
         holder?.nombre?.text = item.title
         holder?.cantidad?.text = item.cantidad
+        holder?.cantidad_dia_departamento?.text = item.cantidad_por_dia
 
         return vista!!
     }
@@ -51,9 +52,12 @@ class AdaptadorDepartamento (var context: Context, items : ArrayList<Card>) : Ba
     private class ViewHolder(vista:View){
         var nombre : TextView ? = null;
         var cantidad : TextView? = null
+        var cantidad_dia_departamento : TextView? = null
+
         init{
             nombre  = vista.findViewById(R.id.nombreDepartamento)
             cantidad  = vista.findViewById(R.id.cantidadPorDepartamento)
+            cantidad_dia_departamento  = vista.findViewById(R.id.ultimosCasosDepartamento)
         }
 
 

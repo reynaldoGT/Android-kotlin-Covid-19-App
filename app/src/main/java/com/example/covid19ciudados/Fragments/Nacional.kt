@@ -17,6 +17,7 @@ import com.example.covid19ciudados.Card
 import com.example.covid19ciudados.departamentos.DepartamentosInfo
 import com.example.covid19ciudados.R
 import com.example.covid19ciudados.departamentos.AdaptadorDepartamento
+import com.example.covid19ciudados.departamentos.CardDepartamento
 import com.example.covid19ciudados.information.GlobalInfomation
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_nacional.*
@@ -35,12 +36,11 @@ class Nacional : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_nacional, container, false)
+        val view = inflater.inflate(R.layout.fragment_nacional, container, false)
         consultarDatos()
 
         consultarDatosDepartamentos()
         return view
-
 
     }
 
@@ -56,15 +56,29 @@ class Nacional : Fragment() {
                     val gson = Gson()
                     val c19 = gson.fromJson(response, GlobalInfomation::class.java)
 
-/*Log.d("Pais", c19.Countries[20].Country)*/
 
                     val dec = DecimalFormat("#,###")
                     var cards = ArrayList<Card>()
                     //c19.Global.TotalConfirmed.toString()
-                    cards.add(Card("Casos Confirmados", dec.format(c19.Countries[20].TotalConfirmed)) )
-                    cards.add(Card("Casos Recuperados", dec.format(c19.Countries[20].TotalRecovered)))
-                    cards.add(Card("Muertes", dec.format(c19.Countries[20].TotalDeaths )))
-                    cards.add(Card("Nuevos Confirmados", dec.format(c19.Countries[20].NewConfirmed)))
+                    cards.add(
+                        Card(
+                            "Casos Confirmados",
+                            dec.format(c19.Countries[20].TotalConfirmed)
+                        )
+                    )
+                    cards.add(
+                        Card(
+                            "Casos Recuperados",
+                            dec.format(c19.Countries[20].TotalRecovered)
+                        )
+                    )
+                    cards.add(Card("Muertes", dec.format(c19.Countries[20].TotalDeaths)))
+                    cards.add(
+                        Card(
+                            "Nuevos Confirmados",
+                            dec.format(c19.Countries[20].NewConfirmed)
+                        )
+                    )
 
                     var grid = view?.findViewById<GridView>(R.id.gridInfo)
                     var tvFecha = view?.findViewById<TextView>(R.id.tvFecha)
@@ -90,39 +104,87 @@ class Nacional : Fragment() {
 
     private fun consultarDatosDepartamentos() {
 
-        val URL =
+        val url =
             "https://mauforonda.github.io/covid19-bolivia/data.json"
         val queue = Volley.newRequestQueue(activity?.applicationContext)
 
         val solicitud =
-            StringRequest(Request.Method.GET, URL, Response.Listener<String> { response ->
+            StringRequest(Request.Method.GET, url, Response.Listener<String> { response ->
                 try {
-//                    Log.d("solicitud por volley", response)
-                    //usando la libreria gson para parsear
+
                     val gson = Gson()
                     val departamentosInfo = gson.fromJson(response, DepartamentosInfo::class.java)
 
 
-                    //Log.d("la paz","en al paz hay lapaz ${departamentosInfo.confirmados[1].dep.potosí}")
-
-                    var cards = ArrayList<Card>()
+                    var cards = ArrayList<CardDepartamento>()
                     //c19.Global.TotalConfirmed.toString()
-                    cards.add(Card("La paz", departamentosInfo.confirmados[0].dep.la_paz.toString()) )
-                    cards.add(Card("Oruro", departamentosInfo.confirmados[0].dep.oruro.toString()))
-                    cards.add(Card("Potosi", departamentosInfo.confirmados[0].dep.potosí.toString()))
+                    cards.add(
+                        CardDepartamento(
+                            "La paz", departamentosInfo.confirmados[0].dep.la_paz.toString(),
+                            (departamentosInfo.confirmados[0].dep.la_paz - departamentosInfo.confirmados[2].dep.la_paz).toString()
+                        )
+                    )
+                    cards.add(
+                        CardDepartamento(
+                            "Oruro",
+                            departamentosInfo.confirmados[0].dep.oruro.toString(),
+                            (departamentosInfo.confirmados[0].dep.oruro - departamentosInfo.confirmados[2].dep.oruro).toString()
+                        )
+                    )
+                    cards.add(
+                        CardDepartamento(
+                            "Potosi",
+                            departamentosInfo.confirmados[0].dep.potosí.toString(),
+                            (departamentosInfo.confirmados[0].dep.potosí - departamentosInfo.confirmados[2].dep.potosí).toString()
+                        )
+                    )
+                    cards.add(
+                        CardDepartamento(
+                            "Cochabamba",
+                            departamentosInfo.confirmados[0].dep.cochabamba.toString(),
+                            (departamentosInfo.confirmados[0].dep.cochabamba - departamentosInfo.confirmados[2].dep.cochabamba).toString()
+                        )
+                    )
+                    cards.add(
+                        CardDepartamento(
+                            "Tarija",
+                            departamentosInfo.confirmados[0].dep.tarija.toString(),
+                            (departamentosInfo.confirmados[0].dep.tarija - departamentosInfo.confirmados[2].dep.tarija).toString()
+                        )
+                    )
+                    cards.add(
+                        CardDepartamento(
+                            "Chuquisaca",
+                            departamentosInfo.confirmados[0].dep.chuquisaca.toString(),
+                            (departamentosInfo.confirmados[0].dep.chuquisaca - departamentosInfo.confirmados[2].dep.chuquisaca).toString()
+                        )
+                    )
 
-                    cards.add(Card("Cochabamba", departamentosInfo.confirmados[0].dep.cochabamba.toString()) )
-                    cards.add(Card("Tarija", departamentosInfo.confirmados[0].dep.tarija.toString()))
-                    cards.add(Card("Chuquisaca", departamentosInfo.confirmados[0].dep.chuquisaca.toString()))
+                    cards.add(
+                        CardDepartamento(
+                            "Santa Cruz",
+                            departamentosInfo.confirmados[0].dep.santa_cruz.toString(),
+                            (departamentosInfo.confirmados[0].dep.santa_cruz - departamentosInfo.confirmados[2].dep.santa_cruz).toString()
+                        )
+                    )
+                    cards.add(
+                        CardDepartamento(
+                            "Beni",
+                            departamentosInfo.confirmados[0].dep.beni.toString(),
+                            (departamentosInfo.confirmados[0].dep.beni - departamentosInfo.confirmados[2].dep.beni).toString()
+                        )
+                    )
+                    cards.add(
+                        CardDepartamento(
+                            "Pando",
+                            departamentosInfo.confirmados[0].dep.pando.toString(),
+                            (departamentosInfo.confirmados[0].dep.pando - departamentosInfo.confirmados[2].dep.pando).toString()
+                        )
+                    )
 
-                    cards.add(Card("Santa Cruz", departamentosInfo.confirmados[0].dep.santa_cruz.toString()) )
-                    cards.add(Card("Beni", departamentosInfo.confirmados[0].dep.beni.toString()))
-                    cards.add(Card("Pando", departamentosInfo.confirmados[0].dep.pando.toString()))
+                    val adapter = AdaptadorDepartamento(activity!!.applicationContext, cards)
 
-
-                    val adaptador = AdaptadorDepartamento(activity!!.applicationContext, cards)
-
-                    lvDepartamentos.adapter = adaptador
+                    lvDepartamentos.adapter = adapter
 
 
                 } catch (e: Exception) {
@@ -133,6 +195,5 @@ class Nacional : Fragment() {
 
             })
         queue.add(solicitud)
-
     }
 }

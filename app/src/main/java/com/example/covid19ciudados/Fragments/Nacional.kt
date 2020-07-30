@@ -56,27 +56,34 @@ class Nacional : Fragment() {
                     val gson = Gson()
                     val c19 = gson.fromJson(response, GlobalInfomation::class.java)
 
-
                     val dec = DecimalFormat("#,###")
-                    var cards = ArrayList<Card>()
-                    //c19.Global.TotalConfirmed.toString()
+                    val cards = ArrayList<Card>()
+
                     cards.add(
                         Card(
                             "Casos Confirmados",
-                            dec.format(c19.Countries[20].TotalConfirmed)
+                            (dec.format(c19.Countries[20].TotalConfirmed)).toString()
+                                .replace(',', '.')
                         )
                     )
                     cards.add(
                         Card(
                             "Casos Recuperados",
-                            dec.format(c19.Countries[20].TotalRecovered)
+                            (dec.format(c19.Countries[20].TotalRecovered)).toString()
+                                .replace(',', '.')
                         )
                     )
-                    cards.add(Card("Muertes", dec.format(c19.Countries[20].TotalDeaths)))
+                    cards.add(
+                        Card(
+                            "Muertes",
+                            (dec.format(c19.Countries[20].TotalDeaths)).toString().replace(',', '.')
+                        )
+                    )
                     cards.add(
                         Card(
                             "Nuevos Confirmados",
-                            dec.format(c19.Countries[20].NewConfirmed)
+                            (dec.format(c19.Countries[20].NewConfirmed)).toString()
+                                .replace(',', '.')
                         )
                     )
 
@@ -92,7 +99,7 @@ class Nacional : Fragment() {
 
 
                 } catch (e: Exception) {
-                    Log.d("error en la peticion", e.message)
+                    Log.d("error en la peticion", e.message.toString())
                 }
             }, Response.ErrorListener { error ->
                 Log.d("Error en el listener", error.message.toString())
@@ -188,7 +195,7 @@ class Nacional : Fragment() {
 
 
                 } catch (e: Exception) {
-                    Log.d("error en la peticion", e.message)
+                    Log.d("error en la peticion", e.message.toString())
                 }
             }, Response.ErrorListener { error ->
                 Log.d("Error en el listener", error.message.toString())

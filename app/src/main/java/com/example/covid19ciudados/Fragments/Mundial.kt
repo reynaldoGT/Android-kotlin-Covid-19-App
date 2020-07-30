@@ -54,15 +54,36 @@ class Mundial : Fragment() {
 
                     Log.d("Ciudad", c19.Global.TotalConfirmed.toString())
                     val dec = DecimalFormat("#,###")
-                    var cards = ArrayList<Card>()
+                    val cards = ArrayList<Card>()
                     //c19.Global.TotalConfirmed.toString()
-                    cards.add(Card("Casos Totales", dec.format(c19.Global.TotalConfirmed)) )
-                    cards.add(Card("Casos Recuperados", dec.format(c19.Global.TotalRecovered)))
-                    cards.add(Card("Muertes", dec.format(c19.Global.TotalDeaths )))
-                    cards.add(Card("Nuevos Confirmados", dec.format(c19.Global.NewConfirmed)))
+                    cards.add(
+                        Card(
+                            "Casos Totales",
+                            dec.format(c19.Global.TotalConfirmed)
+                                .toString().replace(',', '.')
+                        )
+                    )
+                    cards.add(
+                        Card(
+                            "Casos Recuperados",
+                            dec.format(c19.Global.TotalRecovered).toString().replace(',', '.')
+                        )
+                    )
+                    cards.add(
+                        Card(
+                            "Muertes",
+                            dec.format(c19.Global.TotalDeaths).toString().replace(',', '.')
+                        )
+                    )
+                    cards.add(
+                        Card(
+                            "Nuevos Confirmados",
+                            dec.format(c19.Global.NewConfirmed).toString().replace(',', '.')
+                        )
+                    )
 
-                    var grid = view?.findViewById<GridView>(R.id.gridInfo)
-                    var tvFecha = view?.findViewById<TextView>(R.id.tvFecha)
+                    val grid = view?.findViewById<GridView>(R.id.gridInfo)
+                    val tvFecha = view?.findViewById<TextView>(R.id.tvFecha)
 
                     //tvFecha?.text = c19.Date
                     tvFecha?.text = "Datos en las últimas 24 horas"

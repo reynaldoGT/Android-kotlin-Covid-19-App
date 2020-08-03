@@ -56,46 +56,48 @@ class Nacional : Fragment() {
                     val gson = Gson()
                     val c19 = gson.fromJson(response, GlobalInfomation::class.java)
 
-                    val dec = DecimalFormat("#,###")
                     val cards = ArrayList<Card>()
 
                     cards.add(
                         Card(
                             "Casos Confirmados",
-                            (dec.format(c19.Countries[20].TotalConfirmed)).toString()
-                                .replace(',', '.')
+                            /*(dec.format(c19.Countries[20].TotalConfirmed)).toString()
+                                .replace(',', '.')*/
+                            datoProcesado(c19.Countries[20].TotalConfirmed)
                         )
                     )
                     cards.add(
                         Card(
                             "Casos Recuperados",
-                            (dec.format(c19.Countries[20].TotalRecovered)).toString()
-                                .replace(',', '.')
+
+                            datoProcesado(c19.Countries[20].TotalRecovered)
                         )
                     )
                     cards.add(
                         Card(
                             "Muertes",
-                            (dec.format(c19.Countries[20].TotalDeaths)).toString().replace(',', '.')
+                            datoProcesado(c19.Countries[20].TotalDeaths)
+
                         )
                     )
                     cards.add(
                         Card(
-                            "Nuevos Confirmados",
-                            (dec.format(c19.Countries[20].NewConfirmed)).toString()
-                                .replace(',', '.')
+                            "Nuevos Casos",
+                            datoProcesado(c19.Countries[20].NewConfirmed)
                         )
                     )
 
-                    var grid = view?.findViewById<GridView>(R.id.gridInfo)
-                    var tvFecha = view?.findViewById<TextView>(R.id.tvFecha)
+                    //var grid = view?.findViewById<GridView>(R.id.gridInfo)
+                    //var tvFecha = view?.findViewById<TextView>(R.id.tvFecha)
 
                     //tvFecha?.text = c19.Date
-                    tvFecha?.text = "Datos en las últimas 24 horas"
+                    tvFecha.text = "Datos en las últimas 24 horas"
 
 
                     val adaptor = Adaptador(activity!!.applicationContext, cards)
-                    grid?.adapter = adaptor
+                    //? nuevos casos registrados
+
+                    gridInfo.adapter = adaptor
 
 
                 } catch (e: Exception) {
@@ -122,12 +124,11 @@ class Nacional : Fragment() {
                     val gson = Gson()
                     val departamentosInfo = gson.fromJson(response, DepartamentosInfo::class.java)
 
-
-                    var cards = ArrayList<CardDepartamento>()
+                    val cards = ArrayList<CardDepartamento>()
                     //c19.Global.TotalConfirmed.toString()
                     cards.add(
                         CardDepartamento(
-                            "La paz", departamentosInfo.confirmados[0].dep.la_paz.toString(),
+                            "La Paz", departamentosInfo.confirmados[0].dep.la_paz.toString(),
                             (departamentosInfo.confirmados[0].dep.la_paz - departamentosInfo.confirmados[2].dep.la_paz).toString()
                         )
                     )
@@ -203,4 +204,13 @@ class Nacional : Fragment() {
             })
         queue.add(solicitud)
     }
+
+
+    fun datoProcesado(into: Int): String {
+        val dec = DecimalFormat("#,###")
+        return (dec.format(into)).toString()
+            .replace(',', '.')
+    }
 }
+
+

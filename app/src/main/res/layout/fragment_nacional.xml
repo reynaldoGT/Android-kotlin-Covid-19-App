@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Nacional">
 
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
         <LinearLayout
@@ -27,9 +27,9 @@
                 android:id="@+id/tvc19title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Casos en Bolivia"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:text="Casos en Bolivia"
                 android:textColor="#fff"
                 android:textSize="20dp" />
 
@@ -45,18 +45,20 @@
                 android:id="@+id/tvFecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fecha"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:text="Fecha"
                 android:textColor="#fff"
                 android:textSize="12dp" />
+
+
         </LinearLayout>
 
         <ListView
-            android:layout_marginTop="16dp"
             android:id="@+id/lvDepartamentos"
             android:layout_width="wrap_content"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp" />
     </LinearLayout>
 
 

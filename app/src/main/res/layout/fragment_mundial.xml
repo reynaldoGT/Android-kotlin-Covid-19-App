@@ -24,9 +24,9 @@
                 android:id="@+id/tvc19title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Casos en el Mundo"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:text="Casos en el Mundo"
                 android:textColor="#fff"
                 android:textSize="20dp" />
 
@@ -43,11 +43,12 @@
                 android:id="@+id/tvFecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fecha"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:text="Fecha"
                 android:textColor="#fff"
                 android:textSize="12dp" />
+
 
         </LinearLayout>
 

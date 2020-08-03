@@ -20,11 +20,11 @@ import com.example.covid19ciudados.R
 import com.example.covid19ciudados.information.GlobalInfo
 import com.example.covid19ciudados.information.GlobalInfomation
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_mundial.*
 import java.text.DecimalFormat
 
 
 class Mundial : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +32,7 @@ class Mundial : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_mundial, container, false)
-
         consultarDatos()
-
         return view
     }
 
@@ -51,45 +49,42 @@ class Mundial : Fragment() {
                     //usando la libreria gson para parsear
                     val gson = Gson()
                     val c19 = gson.fromJson(response, GlobalInfomation::class.java)
-
-                    Log.d("Ciudad", c19.Global.TotalConfirmed.toString())
-                    val dec = DecimalFormat("#,###")
+                   // Log.d("Ciudad", c19.Global.TotalConfirmed.toString())
                     val cards = ArrayList<Card>()
                     //c19.Global.TotalConfirmed.toString()
                     cards.add(
                         Card(
                             "Casos Totales",
-                            dec.format(c19.Global.TotalConfirmed)
-                                .toString().replace(',', '.')
+                            datoProcesado(c19.Countries[20].TotalConfirmed)
                         )
                     )
                     cards.add(
                         Card(
                             "Casos Recuperados",
-                            dec.format(c19.Global.TotalRecovered).toString().replace(',', '.')
+                            datoProcesado(c19.Countries[20].TotalRecovered)
                         )
                     )
                     cards.add(
                         Card(
                             "Muertes",
-                            dec.format(c19.Global.TotalDeaths).toString().replace(',', '.')
+                            datoProcesado(c19.Countries[20].TotalDeaths)
                         )
                     )
                     cards.add(
                         Card(
-                            "Nuevos Confirmados",
-                            dec.format(c19.Global.NewConfirmed).toString().replace(',', '.')
+                            "Nuevos Casos",
+                            datoProcesado(c19.Countries[20].NewConfirmed)
                         )
                     )
 
-                    val grid = view?.findViewById<GridView>(R.id.gridInfo)
-                    val tvFecha = view?.findViewById<TextView>(R.id.tvFecha)
+                    //val grid = view?.findViewById<GridView>(R.id.gridInfo)
+                    //val tvFecha = view?.findViewById<TextView>(R.id.tvFecha)
 
                     //tvFecha?.text = c19.Date
                     tvFecha?.text = "Datos en las últimas 24 horas"
-                    //var adaptador = ArrayAdapter<Fruta>(this, android.R.layout.simple_list_item_1, frutas)
+
                     val adaptor = Adaptador(activity!!.applicationContext, cards)
-                    grid?.adapter = adaptor
+                    gridInfo?.adapter = adaptor
 
 
                 } catch (e: Exception) {
@@ -103,4 +98,10 @@ class Mundial : Fragment() {
 
     }
 
+
+    fun datoProcesado(into: Int): String {
+        val dec = DecimalFormat("#,###")
+        return (dec.format(into)).toString()
+            .replace(',', '.')
+    }
 }

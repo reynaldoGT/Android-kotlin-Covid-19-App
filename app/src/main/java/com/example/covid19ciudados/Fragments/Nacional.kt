@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
@@ -19,6 +18,11 @@ import com.example.covid19ciudados.R
 import com.example.covid19ciudados.departamentos.AdaptadorDepartamento
 import com.example.covid19ciudados.departamentos.CardDepartamento
 import com.example.covid19ciudados.information.GlobalInfomation
+import com.example.covid19ciudados.information.SharedCode.Companion.datoProcesado
+import com.example.covid19ciudados.information.SharedCode.Companion.new_cases
+import com.example.covid19ciudados.information.SharedCode.Companion.total_cases
+import com.example.covid19ciudados.information.SharedCode.Companion.total_death
+import com.example.covid19ciudados.information.SharedCode.Companion.total_recovered
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_nacional.*
 
@@ -46,12 +50,12 @@ class Nacional : Fragment() {
 
     private fun consultarDatos() {
 
-        val URL =
+        val url =
             "https://api.covid19api.com/summary"
         val queue = Volley.newRequestQueue(activity?.applicationContext)
 
-        val solicitud =
-            StringRequest(Request.Method.GET, URL, Response.Listener<String> { response ->
+        val request =
+            StringRequest(Request.Method.GET, url, Response.Listener<String> { response ->
                 try {
                     val gson = Gson()
                     val c19 = gson.fromJson(response, GlobalInfomation::class.java)
@@ -60,29 +64,27 @@ class Nacional : Fragment() {
 
                     cards.add(
                         Card(
-                            "Casos Confirmados",
-                            /*(dec.format(c19.Countries[20].TotalConfirmed)).toString()
-                                .replace(',', '.')*/
+                            total_cases,
                             datoProcesado(c19.Countries[20].TotalConfirmed)
                         )
                     )
                     cards.add(
                         Card(
-                            "Casos Recuperados",
+                            total_recovered,
 
                             datoProcesado(c19.Countries[20].TotalRecovered)
                         )
                     )
                     cards.add(
                         Card(
-                            "Muertes",
+                            total_death,
                             datoProcesado(c19.Countries[20].TotalDeaths)
 
                         )
                     )
                     cards.add(
                         Card(
-                            "Nuevos Casos",
+                            new_cases,
                             datoProcesado(c19.Countries[20].NewConfirmed)
                         )
                     )
@@ -107,17 +109,16 @@ class Nacional : Fragment() {
                 Log.d("Error en el listener", error.message.toString())
 
             })
-        queue.add(solicitud)
+        queue.add(request)
 
     }
 
     private fun consultarDatosDepartamentos() {
-
         val url =
             "https://mauforonda.github.io/covid19-bolivia/data.json"
         val queue = Volley.newRequestQueue(activity?.applicationContext)
 
-        val solicitud =
+        val request =
             StringRequest(Request.Method.GET, url, Response.Listener<String> { response ->
                 try {
 
@@ -128,7 +129,8 @@ class Nacional : Fragment() {
                     //c19.Global.TotalConfirmed.toString()
                     cards.add(
                         CardDepartamento(
-                            "La Paz", departamentosInfo.confirmados[0].dep.la_paz.toString(),
+                            "La Paz",
+                            departamentosInfo.confirmados[0].dep.la_paz.toString(),
                             (departamentosInfo.confirmados[0].dep.la_paz - departamentosInfo.confirmados[2].dep.la_paz).toString()
                         )
                     )
@@ -202,15 +204,10 @@ class Nacional : Fragment() {
                 Log.d("Error en el listener", error.message.toString())
 
             })
-        queue.add(solicitud)
+        queue.add(request)
     }
 
 
-    fun datoProcesado(into: Int): String {
-        val dec = DecimalFormat("#,###")
-        return (dec.format(into)).toString()
-            .replace(',', '.')
-    }
 }
 
 

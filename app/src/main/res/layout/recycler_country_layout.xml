@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <TextView
+
+        android:id="@+id/tvCountryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Country"
+        android:textAllCaps="true"
+        android:textColor="@color/text_titleColor" />
+
+    <TextView
+        android:id="@+id/titleTotalCases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCountryName"
+        android:layout_marginTop="8dp"
+        android:text="Casos Totales"
+        android:textColor="@color/text_titleColor" />
+
+    <TextView
+        android:id="@+id/TotalCases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCountryName"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/titleTotalCases"
+        android:text="0000" />
+
+    <TextView
+        android:id="@+id/TitlenewCases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTotalCases"
+        android:layout_marginTop="8dp"
+        android:text="Nuevos Casos"
+        android:textColor="@color/text_titleColor" />
+
+    <TextView
+        android:id="@+id/newCasesNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTotalCases"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/titleTotalCases"
+        android:text="0000" />
+
+    <TextView
+        android:id="@+id/TitleTotalDeath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TitlenewCases"
+        android:layout_marginTop="8dp"
+        android:text="Muertes: "
+        android:textColor="@color/text_titleColor" />
+
+    <TextView
+        android:id="@+id/totalDeathNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newCasesNumber"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/titleTotalCases"
+        android:text="0000" />
+
+    <TextView
+        android:id="@+id/TitleTotalRecovery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TitleTotalDeath"
+        android:layout_marginTop="8dp"
+        android:text="Recuperados: "
+        android:textColor="@color/text_titleColor" />
+
+    <TextView
+        android:id="@+id/TotalRecoveryNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TitleTotalDeath"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/TitleTotalRecovery"
+        android:text="0000" />
+
+
+    <TextView
+        android:id="@+id/TitleTotalRecoveryPercentaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TitleTotalRecovery"
+        android:layout_marginTop="8dp"
+        android:text="% Recuperados: "
+        android:textColor="@color/text_titleColor" />
+
+    <TextView
+        android:id="@+id/TotalRecoveryPercentajeNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TitleTotalRecovery"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/TitleTotalRecoveryPercentaje"
+        android:text="0000" />
+
+
+</RelativeLayout>

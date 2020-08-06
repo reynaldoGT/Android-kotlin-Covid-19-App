@@ -30,6 +30,7 @@
                 android:textColor="#fff"
                 android:textSize="20dp" />
 
+
             <GridView
                 android:id="@+id/gridInfo"
                 android:layout_width="match_parent"
@@ -37,7 +38,6 @@
                 android:horizontalSpacing="16dp"
                 android:numColumns="2"
                 android:verticalSpacing="16dp" />
-
 
             <TextView
                 android:id="@+id/tvFecha"
@@ -51,7 +51,12 @@
 
 
         </LinearLayout>
-
+        <!-- Desde aqui va ir el list view para ver todos los paises -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMundi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp" />
     </LinearLayout>
 
 </FrameLayout>

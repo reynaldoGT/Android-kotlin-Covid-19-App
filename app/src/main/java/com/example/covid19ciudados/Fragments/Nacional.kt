@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.Response
@@ -25,8 +24,6 @@ import com.example.covid19ciudados.information.SharedCode.Companion.total_death
 import com.example.covid19ciudados.information.SharedCode.Companion.total_recovered
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_nacional.*
-
-import java.text.DecimalFormat
 
 import kotlin.collections.ArrayList
 
@@ -125,74 +122,80 @@ class Nacional : Fragment() {
                     val gson = Gson()
                     val departamentosInfo = gson.fromJson(response, DepartamentosInfo::class.java)
 
-                    val cards = ArrayList<CardDepartamento>()
+                    val cardsDepartaments = ArrayList<CardDepartamento>()
                     //c19.Global.TotalConfirmed.toString()
-                    cards.add(
+                    cardsDepartaments.add(
                         CardDepartamento(
                             "La Paz",
-                            departamentosInfo.confirmados[0].dep.la_paz.toString(),
-                            (departamentosInfo.confirmados[0].dep.la_paz - departamentosInfo.confirmados[2].dep.la_paz).toString()
+                            departamentosInfo.confirmados[0].dep.la_paz,
+                            (departamentosInfo.confirmados[0].dep.la_paz - departamentosInfo.confirmados[2].dep.la_paz)
                         )
                     )
-                    cards.add(
+                    cardsDepartaments.add(
                         CardDepartamento(
                             "Oruro",
-                            departamentosInfo.confirmados[0].dep.oruro.toString(),
-                            (departamentosInfo.confirmados[0].dep.oruro - departamentosInfo.confirmados[2].dep.oruro).toString()
+                            departamentosInfo.confirmados[0].dep.oruro,
+                            (departamentosInfo.confirmados[0].dep.oruro - departamentosInfo.confirmados[2].dep.oruro)
                         )
                     )
-                    cards.add(
+                    cardsDepartaments.add(
                         CardDepartamento(
                             "Potosi",
-                            departamentosInfo.confirmados[0].dep.potosí.toString(),
-                            (departamentosInfo.confirmados[0].dep.potosí - departamentosInfo.confirmados[2].dep.potosí).toString()
+                            departamentosInfo.confirmados[0].dep.potosí,
+                            (departamentosInfo.confirmados[0].dep.potosí - departamentosInfo.confirmados[2].dep.potosí)
                         )
                     )
-                    cards.add(
+                    cardsDepartaments.add(
                         CardDepartamento(
                             "Cochabamba",
-                            departamentosInfo.confirmados[0].dep.cochabamba.toString(),
-                            (departamentosInfo.confirmados[0].dep.cochabamba - departamentosInfo.confirmados[2].dep.cochabamba).toString()
+                            departamentosInfo.confirmados[0].dep.cochabamba,
+                            (departamentosInfo.confirmados[0].dep.cochabamba - departamentosInfo.confirmados[2].dep.cochabamba)
                         )
                     )
-                    cards.add(
+                    cardsDepartaments.add(
                         CardDepartamento(
                             "Tarija",
-                            departamentosInfo.confirmados[0].dep.tarija.toString(),
-                            (departamentosInfo.confirmados[0].dep.tarija - departamentosInfo.confirmados[2].dep.tarija).toString()
+                            departamentosInfo.confirmados[0].dep.tarija,
+                            departamentosInfo.confirmados[0].dep.tarija - departamentosInfo.confirmados[2].dep.tarija
                         )
                     )
-                    cards.add(
+                    cardsDepartaments.add(
                         CardDepartamento(
                             "Chuquisaca",
-                            departamentosInfo.confirmados[0].dep.chuquisaca.toString(),
-                            (departamentosInfo.confirmados[0].dep.chuquisaca - departamentosInfo.confirmados[2].dep.chuquisaca).toString()
+                            departamentosInfo.confirmados[0].dep.chuquisaca,
+                            (departamentosInfo.confirmados[0].dep.chuquisaca - departamentosInfo.confirmados[2].dep.chuquisaca)
                         )
                     )
 
-                    cards.add(
+                    cardsDepartaments.add(
                         CardDepartamento(
                             "Santa Cruz",
-                            departamentosInfo.confirmados[0].dep.santa_cruz.toString(),
-                            (departamentosInfo.confirmados[0].dep.santa_cruz - departamentosInfo.confirmados[2].dep.santa_cruz).toString()
+                            departamentosInfo.confirmados[0].dep.santa_cruz,
+                            (departamentosInfo.confirmados[0].dep.santa_cruz - departamentosInfo.confirmados[2].dep.santa_cruz)
                         )
                     )
-                    cards.add(
+                    cardsDepartaments.add(
                         CardDepartamento(
                             "Beni",
-                            departamentosInfo.confirmados[0].dep.beni.toString(),
-                            (departamentosInfo.confirmados[0].dep.beni - departamentosInfo.confirmados[2].dep.beni).toString()
+                            departamentosInfo.confirmados[0].dep.beni,
+                            (departamentosInfo.confirmados[0].dep.beni - departamentosInfo.confirmados[2].dep.beni)
                         )
                     )
-                    cards.add(
+                    cardsDepartaments.add(
                         CardDepartamento(
                             "Pando",
-                            departamentosInfo.confirmados[0].dep.pando.toString(),
-                            (departamentosInfo.confirmados[0].dep.pando - departamentosInfo.confirmados[2].dep.pando).toString()
+                            departamentosInfo.confirmados[0].dep.pando,
+                            (departamentosInfo.confirmados[0].dep.pando - departamentosInfo.confirmados[2].dep.pando)
                         )
                     )
-
-                    val adapter = AdaptadorDepartamento(activity!!.applicationContext, cards)
+                    // Ordenando la lista para poder ver la cifra mas alta por dia
+                    val sortedList = cardsDepartaments.sortedByDescending { it.cantidad_por_dia }
+                    // aqui es donde se toma el array de departamentos par mostrarlos
+                    val adapter =
+                        AdaptadorDepartamento(
+                            activity!!.applicationContext,
+                            ArrayList(sortedList)
+                        )
 
                     lvDepartamentos.adapter = adapter
 

@@ -4,7 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import com.example.covid19ciudados.information.Country
 
 class CRUD_CASOS_TOTALES(context: Context) {
 
@@ -22,14 +21,14 @@ class CRUD_CASOS_TOTALES(context: Context) {
         values.put(CasosC19Contract.Companion.Entrada.COLUMNA_ID, 0)
         values.put(
             CasosC19Contract.Companion.Entrada.COLUMNA_CASOS_TOTALES,
-            item_pais.casos_totales
+            item_pais.casos_totales_confirmados
         )
         values.put(
             CasosC19Contract.Companion.Entrada.COLUMNA_CASOS_RECUPERADOS,
-            item_pais.casos_recuperados
+            item_pais.casos_total_recuperados
         )
-        values.put(CasosC19Contract.Companion.Entrada.COLUMNA_MUERTES, item_pais.muertes)
-        values.put(CasosC19Contract.Companion.Entrada.COLUMNA_NUEVOS_CASOS, item_pais.nuevos_casos)
+        values.put(CasosC19Contract.Companion.Entrada.COLUMNA_MUERTES, item_pais.total_muertes)
+        values.put(CasosC19Contract.Companion.Entrada.COLUMNA_NUEVOS_CASOS, item_pais.nuevos_casos_confirmados)
         values.put(CasosC19Contract.Companion.Entrada.COLUMNA_NOMBRE_PAIS, item_pais.nombre_pais)
         values.put(
             CasosC19Contract.Companion.Entrada.COLUMNA_PORCENTAJE_RECUPERADOS,
@@ -85,7 +84,6 @@ class CRUD_CASOS_TOTALES(context: Context) {
                     ,
                     c.getString((c.getColumnIndexOrThrow(CasosC19Contract.Companion.Entrada.COLUMNA_NOMBRE_PAIS))),
                     c.getInt((c.getColumnIndexOrThrow(CasosC19Contract.Companion.Entrada.COLUMNA_PORCENTAJE_RECUPERADOS)))
-
                 )
             )
         }

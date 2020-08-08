@@ -14,7 +14,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
     companion object {
         val CREATE_TABLE_CASOS_TOTALES =
             "CREATE TABLE  ${CasosC19Contract.Companion.Entrada.NOMBRE_TABLA}(" +
-                    "${CasosC19Contract.Companion.Entrada.COLUMNA_ID}  INTEGER PRIMARY KEY AUTOINCREMENT,," +
+                    "${CasosC19Contract.Companion.Entrada.COLUMNA_ID}  INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "${CasosC19Contract.Companion.Entrada.COLUMNA_CASOS_TOTALES} INTEGER," +
                     "${CasosC19Contract.Companion.Entrada.COLUMNA_CASOS_RECUPERADOS} INTEGER," +
                     "${CasosC19Contract.Companion.Entrada.COLUMNA_MUERTES} INTEGER," +

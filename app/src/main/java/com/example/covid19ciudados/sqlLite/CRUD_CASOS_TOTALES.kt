@@ -18,7 +18,7 @@ class CRUD_CASOS_TOTALES(context: Context) {
         val db: SQLiteDatabase = helper?.writableDatabase!!
         //Mapeo con los datos a insertar
         val values = ContentValues()
-        values.put(CasosC19Contract.Companion.Entrada.COLUMNA_ID, 0)
+        //values.put(CasosC19Contract.Companion.Entrada.COLUMNA_ID, 0)
         values.put(
             CasosC19Contract.Companion.Entrada.COLUMNA_CASOS_TOTALES,
             item_pais.casos_totales_confirmados

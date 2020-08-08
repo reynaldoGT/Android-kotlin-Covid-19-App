@@ -7,8 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,19 +18,16 @@ import com.example.covid19ciudados.Adaptador
 import com.example.covid19ciudados.Card
 import com.example.covid19ciudados.R
 import com.example.covid19ciudados.information.AdapterMundiData
-import com.example.covid19ciudados.information.GlobalInfo
 import com.example.covid19ciudados.information.GlobalInfomation
 import com.example.covid19ciudados.information.SharedCode.Companion.datoProcesado
 import com.example.covid19ciudados.information.SharedCode.Companion.new_cases
 import com.example.covid19ciudados.information.SharedCode.Companion.total_cases
 import com.example.covid19ciudados.information.SharedCode.Companion.total_death
 import com.example.covid19ciudados.information.SharedCode.Companion.total_recovered
-import com.example.covid19ciudados.information.VerRed
 import com.example.covid19ciudados.sqlLite.CRUD_CASOS_TOTALES
 import com.example.covid19ciudados.sqlLite.Pais
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_mundial.*
-import java.text.DecimalFormat
 
 
 class Mundial : Fragment() {
@@ -53,20 +48,27 @@ class Mundial : Fragment() {
         //inicializando la clase del crud
         crud = CRUD_CASOS_TOTALES(view!!.context)
 
-        consultarDatos()
 
+        if (isNetworkConnected()) {
+            consultData()
+            Log.d("hay internet", "true")
+        } else {
+            Log.d("No hay internet", "true")
+            queryDatabaseData()
+
+        }
 
         return view
     }
 
-    private fun consultarDatos() {
+    private fun consultData() {
 
-        val URL =
+        val url =
             "https://api.covid19api.com/summary"
         val queue = Volley.newRequestQueue(activity?.applicationContext)
 
-        val solicitud =
-            StringRequest(Request.Method.GET, URL, Response.Listener<String> { response ->
+        val request =
+            StringRequest(Request.Method.GET, url, Response.Listener<String> { response ->
                 try {
 //                    Log.d("solicitud por volley", response)
                     //usando la libreria gson para parsear
@@ -75,6 +77,7 @@ class Mundial : Fragment() {
 
                     //LLenando la base de datos
                     for (c19Contry in c19.Countries) {
+                        Log.d("registro Añadido", "true")
                         crud?.addRow(
                             Pais(
                                 0,
@@ -87,8 +90,6 @@ class Mundial : Fragment() {
                             )
                         )
                     }
-
-
                     // Log.d("Ciudad", c19.Global.TotalConfirmed.toString())
                     val cards = ArrayList<Card>()
                     //c19.Global.TotalConfirmed.toString()
@@ -131,7 +132,6 @@ class Mundial : Fragment() {
                     listaCountries = view?.findViewById(R.id.recyclerViewMundi)
                     listaCountries?.layoutManager = layout_Manager
 
-
                     listaCountries?.adapter = adaptadorMundi
 
 
@@ -142,18 +142,33 @@ class Mundial : Fragment() {
                 Log.d("Error en el listener", error.message.toString())
 
             })
-        queue.add(solicitud)
+        queue.add(request)
 
     }
 
     fun isNetworkConnected(): Boolean {
-
         val conectivytiManager =
             activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val netWorkInfo = conectivytiManager.activeNetworkInfo
         return netWorkInfo != null && netWorkInfo.isConnected
+    }
 
 
+    fun queryDatabaseData() {
+        val paises = crud?.getPaises()
+
+        for (pais in paises!!) {
+            Log.d("pais", pais.nombre_pais)
+        }
+
+        listaCountries?.setHasFixedSize(true)
+        //adaptadorMundi = AdapterMundiData(ArrayList(c19.Countries))
+        layout_Manager = LinearLayoutManager(view?.context)
+
+        listaCountries = view?.findViewById(R.id.recyclerViewMundi)
+        listaCountries?.layoutManager = layout_Manager
+
+        listaCountries?.adapter = adaptadorMundi
     }
 
 }

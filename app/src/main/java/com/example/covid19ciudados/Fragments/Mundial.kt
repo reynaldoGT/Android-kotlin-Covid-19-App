@@ -7,6 +7,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+<<<<<<< HEAD
+=======
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+>>>>>>> 5ccf9c5
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +51,7 @@ class Mundial : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+<<<<<<< HEAD
         val view = inflater.inflate(R.layout.fragment_mundial, container, false)
 
         //inicializando la clase del crud
@@ -58,6 +67,40 @@ class Mundial : Fragment() {
 
         }
 
+=======
+        var view: View? = null
+
+
+        if (!isNetworkConnected()) {
+
+
+            view = inflater.inflate(R.layout.no_internet, container, false)
+
+            val imageView = view.findViewById<ImageView>(R.id.noWifiImage)
+            val textView = view.findViewById<TextView>(R.id.tvNoInternet)
+
+            val anim: Animation = AlphaAnimation(0.0f, 1.0f)
+            anim.duration = 1200 //You can manage the blinking time with this parameter
+
+            anim.startOffset = 10
+            anim.repeatMode = Animation.REVERSE
+            anim.repeatCount = Animation.INFINITE
+            imageView.startAnimation(anim)
+            textView.startAnimation(anim)
+
+
+        } else {
+            view = inflater.inflate(R.layout.fragment_mundial, container, false)
+
+            consultarDatos()
+
+        }
+
+
+
+
+
+>>>>>>> 5ccf9c5
         return view
     }
 
@@ -123,10 +166,13 @@ class Mundial : Fragment() {
 
                     val adaptor = Adaptador(activity!!.applicationContext, cards)
 
+                    val sortedList = c19.Countries.sortedByDescending { it.TotalConfirmed }
+                    /*progressBar.setVisibility(View.INVISIBLE)*/
+
                     gridInfo?.adapter = adaptor
 
                     listaCountries?.setHasFixedSize(true)
-                    adaptadorMundi = AdapterMundiData(ArrayList(c19.Countries))
+                    adaptadorMundi = AdapterMundiData(ArrayList(sortedList))
                     layout_Manager = LinearLayoutManager(view?.context)
 
                     listaCountries = view?.findViewById(R.id.recyclerViewMundi)
@@ -134,6 +180,9 @@ class Mundial : Fragment() {
 
                     listaCountries?.adapter = adaptadorMundi
 
+                    // para detener el circular progress bar
+
+                    view?.findViewById<ProgressBar>(R.id.progressBar)!!.visibility = View.GONE
 
                 } catch (e: Exception) {
                     Log.d("error en la peticion", e.message.toString())
@@ -152,6 +201,7 @@ class Mundial : Fragment() {
         val netWorkInfo = conectivytiManager.activeNetworkInfo
         return netWorkInfo != null && netWorkInfo.isConnected
     }
+<<<<<<< HEAD
 
 
     fun queryDatabaseData() {
@@ -170,5 +220,7 @@ class Mundial : Fragment() {
 
         listaCountries?.adapter = adaptadorMundi
     }
+=======
+>>>>>>> 5ccf9c5
 
 }

@@ -15,6 +15,7 @@ class SharedCode {
             return (dec.format(into)).toString()
                 .replace(',', '.')
         }
+
     }
 
 }

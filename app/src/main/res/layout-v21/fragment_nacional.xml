@@ -60,7 +60,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:indeterminate="true"
-             />
+            android:indeterminateTint="@color/colorPrimary"
+            android:indeterminateTintMode="src_atop" />
+
         <ListView
             android:id="@+id/lvDepartamentos"
             android:layout_width="wrap_content"

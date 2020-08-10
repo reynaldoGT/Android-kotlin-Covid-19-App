@@ -1,10 +1,16 @@
 package com.example.covid19ciudados.Fragments
 
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
@@ -26,8 +32,6 @@ import com.example.covid19ciudados.information.SharedCode.Companion.total_recove
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_nacional.*
 
-import java.text.DecimalFormat
-
 import kotlin.collections.ArrayList
 
 
@@ -40,10 +44,32 @@ class Nacional : Fragment() {
     ): View? {
 
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_nacional, container, false)
-        consultarDatos()
+        var view: View? = null
 
-        consultarDatosDepartamentos()
+
+        if (!isNetworkConnected()) {
+            view = inflater.inflate(R.layout.no_internet, container, false)
+
+            val imageView = view.findViewById<ImageView>(R.id.noWifiImage)
+            val textView = view.findViewById<TextView>(R.id.tvNoInternet)
+
+            val anim: Animation = AlphaAnimation(0.0f, 1.0f)
+            anim.duration = 1200 //You can manage the blinking time with this parameter
+
+            anim.startOffset = 10
+            anim.repeatMode = Animation.REVERSE
+            anim.repeatCount = Animation.INFINITE
+            imageView.startAnimation(anim)
+            textView.startAnimation(anim)
+
+        } else {
+            view = inflater.inflate(R.layout.fragment_nacional, container, false)
+
+            consultarDatos()
+            consultarDatosDepartamentos()
+        }
+
+
         return view
 
     }
@@ -125,77 +151,81 @@ class Nacional : Fragment() {
                     val gson = Gson()
                     val departamentosInfo = gson.fromJson(response, DepartamentosInfo::class.java)
 
-                    val cards = ArrayList<CardDepartamento>()
+                    var cardsDepartamentos = ArrayList<CardDepartamento>()
                     //c19.Global.TotalConfirmed.toString()
-                    cards.add(
+                    cardsDepartamentos.add(
                         CardDepartamento(
                             "La Paz",
-                            departamentosInfo.confirmados[0].dep.la_paz.toString(),
-                            (departamentosInfo.confirmados[0].dep.la_paz - departamentosInfo.confirmados[2].dep.la_paz).toString()
+                            departamentosInfo.confirmados[0].dep.la_paz,
+                            (departamentosInfo.confirmados[0].dep.la_paz - departamentosInfo.confirmados[2].dep.la_paz)
                         )
                     )
-                    cards.add(
+                    cardsDepartamentos.add(
                         CardDepartamento(
                             "Oruro",
-                            departamentosInfo.confirmados[0].dep.oruro.toString(),
-                            (departamentosInfo.confirmados[0].dep.oruro - departamentosInfo.confirmados[2].dep.oruro).toString()
+                            departamentosInfo.confirmados[0].dep.oruro,
+                            (departamentosInfo.confirmados[0].dep.oruro - departamentosInfo.confirmados[2].dep.oruro)
                         )
                     )
-                    cards.add(
+                    cardsDepartamentos.add(
                         CardDepartamento(
                             "Potosi",
-                            departamentosInfo.confirmados[0].dep.potosí.toString(),
-                            (departamentosInfo.confirmados[0].dep.potosí - departamentosInfo.confirmados[2].dep.potosí).toString()
+                            departamentosInfo.confirmados[0].dep.potosí,
+                            (departamentosInfo.confirmados[0].dep.potosí - departamentosInfo.confirmados[2].dep.potosí)
                         )
                     )
-                    cards.add(
+                    cardsDepartamentos.add(
                         CardDepartamento(
                             "Cochabamba",
-                            departamentosInfo.confirmados[0].dep.cochabamba.toString(),
-                            (departamentosInfo.confirmados[0].dep.cochabamba - departamentosInfo.confirmados[2].dep.cochabamba).toString()
+                            departamentosInfo.confirmados[0].dep.cochabamba,
+                            (departamentosInfo.confirmados[0].dep.cochabamba - departamentosInfo.confirmados[2].dep.cochabamba)
                         )
                     )
-                    cards.add(
+                    cardsDepartamentos.add(
                         CardDepartamento(
                             "Tarija",
-                            departamentosInfo.confirmados[0].dep.tarija.toString(),
-                            (departamentosInfo.confirmados[0].dep.tarija - departamentosInfo.confirmados[2].dep.tarija).toString()
+                            departamentosInfo.confirmados[0].dep.tarija,
+                            (departamentosInfo.confirmados[0].dep.tarija - departamentosInfo.confirmados[2].dep.tarija)
                         )
                     )
-                    cards.add(
+                    cardsDepartamentos.add(
                         CardDepartamento(
                             "Chuquisaca",
-                            departamentosInfo.confirmados[0].dep.chuquisaca.toString(),
-                            (departamentosInfo.confirmados[0].dep.chuquisaca - departamentosInfo.confirmados[2].dep.chuquisaca).toString()
+                            departamentosInfo.confirmados[0].dep.chuquisaca,
+                            (departamentosInfo.confirmados[0].dep.chuquisaca - departamentosInfo.confirmados[2].dep.chuquisaca)
                         )
                     )
 
-                    cards.add(
+                    cardsDepartamentos.add(
                         CardDepartamento(
                             "Santa Cruz",
-                            departamentosInfo.confirmados[0].dep.santa_cruz.toString(),
-                            (departamentosInfo.confirmados[0].dep.santa_cruz - departamentosInfo.confirmados[2].dep.santa_cruz).toString()
+                            departamentosInfo.confirmados[0].dep.santa_cruz,
+                            (departamentosInfo.confirmados[0].dep.santa_cruz - departamentosInfo.confirmados[2].dep.santa_cruz)
                         )
                     )
-                    cards.add(
+                    cardsDepartamentos.add(
                         CardDepartamento(
                             "Beni",
-                            departamentosInfo.confirmados[0].dep.beni.toString(),
-                            (departamentosInfo.confirmados[0].dep.beni - departamentosInfo.confirmados[2].dep.beni).toString()
+                            departamentosInfo.confirmados[0].dep.beni,
+                            (departamentosInfo.confirmados[0].dep.beni - departamentosInfo.confirmados[2].dep.beni)
                         )
                     )
-                    cards.add(
+                    cardsDepartamentos.add(
                         CardDepartamento(
                             "Pando",
-                            departamentosInfo.confirmados[0].dep.pando.toString(),
-                            (departamentosInfo.confirmados[0].dep.pando - departamentosInfo.confirmados[2].dep.pando).toString()
+                            departamentosInfo.confirmados[0].dep.pando,
+                            (departamentosInfo.confirmados[0].dep.pando - departamentosInfo.confirmados[2].dep.pando)
                         )
                     )
+                    // Ordenando la lista para poder ver la cifra mas alta por dia
+                    val sortedList = cardsDepartamentos.sortedByDescending { it.cantidad_por_dia }
 
-                    val adapter = AdaptadorDepartamento(activity!!.applicationContext, cards)
+                    val adapter = AdaptadorDepartamento(activity!!.applicationContext,  ArrayList(sortedList))
 
                     lvDepartamentos.adapter = adapter
 
+                    // para detener el circular progress bar
+                    view?.findViewById<ProgressBar>(R.id.progressBar)!!.visibility = View.GONE
 
                 } catch (e: Exception) {
                     Log.d("error en la peticion", e.message.toString())
@@ -207,7 +237,12 @@ class Nacional : Fragment() {
         queue.add(request)
     }
 
-
+    fun isNetworkConnected(): Boolean {
+        val conectivytiManager =
+            activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val netWorkInfo = conectivytiManager.activeNetworkInfo
+        return netWorkInfo != null && netWorkInfo.isConnected
+    }
 }
 
 

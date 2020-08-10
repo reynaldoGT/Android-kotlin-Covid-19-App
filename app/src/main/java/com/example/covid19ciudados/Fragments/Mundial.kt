@@ -7,7 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +23,6 @@ import com.example.covid19ciudados.Adaptador
 import com.example.covid19ciudados.Card
 import com.example.covid19ciudados.R
 import com.example.covid19ciudados.information.AdapterMundiData
-import com.example.covid19ciudados.information.GlobalInfo
 import com.example.covid19ciudados.information.GlobalInfomation
 import com.example.covid19ciudados.information.SharedCode.Companion.datoProcesado
 import com.example.covid19ciudados.information.SharedCode.Companion.new_cases
@@ -29,7 +31,6 @@ import com.example.covid19ciudados.information.SharedCode.Companion.total_death
 import com.example.covid19ciudados.information.SharedCode.Companion.total_recovered
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_mundial.*
-import java.text.DecimalFormat
 
 
 class Mundial : Fragment() {
@@ -44,8 +45,38 @@ class Mundial : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_mundial, container, false)
-        consultarDatos()
+        var view: View? = null
+
+
+        if (!isNetworkConnected()) {
+
+
+            view = inflater.inflate(R.layout.no_internet, container, false)
+
+            val imageView = view.findViewById<ImageView>(R.id.noWifiImage)
+            val textView = view.findViewById<TextView>(R.id.tvNoInternet)
+
+            val anim: Animation = AlphaAnimation(0.0f, 1.0f)
+            anim.duration = 1200 //You can manage the blinking time with this parameter
+
+            anim.startOffset = 10
+            anim.repeatMode = Animation.REVERSE
+            anim.repeatCount = Animation.INFINITE
+            imageView.startAnimation(anim)
+            textView.startAnimation(anim)
+
+
+        } else {
+            view = inflater.inflate(R.layout.fragment_mundial, container, false)
+
+            consultarDatos()
+
+        }
+
+
+
+
+
         return view
     }
 
@@ -95,10 +126,13 @@ class Mundial : Fragment() {
 
                     val adaptor = Adaptador(activity!!.applicationContext, cards)
 
+                    val sortedList = c19.Countries.sortedByDescending { it.TotalConfirmed }
+                    /*progressBar.setVisibility(View.INVISIBLE)*/
+
                     gridInfo?.adapter = adaptor
 
                     listaCountries?.setHasFixedSize(true)
-                    adaptadorMundi = AdapterMundiData(ArrayList(c19.Countries))
+                    adaptadorMundi = AdapterMundiData(ArrayList(sortedList))
                     layout_Manager = LinearLayoutManager(view?.context)
 
                     listaCountries = view?.findViewById(R.id.recyclerViewMundi)
@@ -107,6 +141,9 @@ class Mundial : Fragment() {
 
                     listaCountries?.adapter = adaptadorMundi
 
+                    // para detener el circular progress bar
+
+                    view?.findViewById<ProgressBar>(R.id.progressBar)!!.visibility = View.GONE
 
                 } catch (e: Exception) {
                     Log.d("error en la peticion", e.message.toString())
@@ -119,5 +156,11 @@ class Mundial : Fragment() {
 
     }
 
+    fun isNetworkConnected(): Boolean {
+        val conectivytiManager =
+            activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val netWorkInfo = conectivytiManager.activeNetworkInfo
+        return netWorkInfo != null && netWorkInfo.isConnected
+    }
 
 }

@@ -32,8 +32,7 @@ class AdaptadorDepartamento(var context: Context, items: ArrayList<CardDepartame
         }
         val item = getItem(position) as CardDepartamento
         holder?.nombre?.text = item.title
-        holder?.cantidad?.text = datoProcesado(item.cantidad.toInt())
-        holder?.cantidad_dia_departamento?.text = datoProcesado(item.cantidad_por_dia.toInt())
+        holder?.cantidad_dia_departamento?.text = datoProcesado(item.cantidad_por_dia)
 
         return vista!!
     }

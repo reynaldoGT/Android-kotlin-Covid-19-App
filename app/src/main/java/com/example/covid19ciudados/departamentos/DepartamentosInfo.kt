@@ -14,14 +14,14 @@ data class Confirmado (
 )
 
 data class Dep (
-    val la_paz: Long,
-    val cochabamba: Long,
-    val santa_cruz: Long,
-    val oruro: Long,
-    val potosí: Long,
-    val tarija: Long,
-    val chuquisaca: Long,
-    val beni: Long,
-    val pando: Long
+    val la_paz: Int,
+    val cochabamba: Int,
+    val santa_cruz: Int,
+    val oruro: Int,
+    val potosí: Int,
+    val tarija: Int,
+    val chuquisaca: Int,
+    val beni: Int,
+    val pando: Int
 )
 

@@ -20,7 +20,7 @@ class AdaptadorDepartamento(var context: Context, items: ArrayList<CardDepartame
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var holder: ViewHolder? = null
+        val holder: ViewHolder?
         var vista: View? = convertView
 
         if (vista == null) {
@@ -31,14 +31,11 @@ class AdaptadorDepartamento(var context: Context, items: ArrayList<CardDepartame
             holder = vista.tag as? ViewHolder
         }
         val item = getItem(position) as CardDepartamento
-<<<<<<< HEAD
+
         holder?.nombre?.text = item.nombre_departamento
-        holder?.cantidad?.text = datoProcesado(item.cantidad_total.toInt())
-        holder?.cantidad_dia_departamento?.text = datoProcesado(item.cantidad_por_dia.toInt())
-=======
-        holder?.nombre?.text = item.title
+        holder?.cantidad_total?.text = datoProcesado(item.cantidad_total)
         holder?.cantidad_dia_departamento?.text = datoProcesado(item.cantidad_por_dia)
->>>>>>> 5ccf9c5
+
 
         return vista!!
     }
@@ -58,12 +55,12 @@ class AdaptadorDepartamento(var context: Context, items: ArrayList<CardDepartame
 
     private class ViewHolder(vista: View) {
         var nombre: TextView? = null;
-        var cantidad: TextView? = null
+        var cantidad_total: TextView? = null
         var cantidad_dia_departamento: TextView? = null
 
         init {
             nombre = vista.findViewById(R.id.nombreDepartamento)
-            cantidad = vista.findViewById(R.id.cantidadPorDepartamento)
+            cantidad_total = vista.findViewById(R.id.cantidadPorDepartamento)
             cantidad_dia_departamento = vista.findViewById(R.id.ultimosCasosDepartamento)
         }
 

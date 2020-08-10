@@ -7,14 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-<<<<<<< HEAD
-=======
+
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
->>>>>>> 5ccf9c5
+
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.Response
@@ -154,64 +153,45 @@ class Nacional : Fragment() {
                     val gson = Gson()
                     val departamentosInfo = gson.fromJson(response, DepartamentosInfo::class.java)
 
-<<<<<<< HEAD
-                    val cardsDepartaments = ArrayList<CardDepartamento>()
-                    //c19.Global.TotalConfirmed.toString()
-                    cardsDepartaments.add(
-=======
+
                     var cardsDepartamentos = ArrayList<CardDepartamento>()
                     //c19.Global.TotalConfirmed.toString()
                     cardsDepartamentos.add(
->>>>>>> 5ccf9c5
+
                         CardDepartamento(
                             "La Paz",
                             departamentosInfo.confirmados[0].dep.la_paz,
                             (departamentosInfo.confirmados[0].dep.la_paz - departamentosInfo.confirmados[2].dep.la_paz)
                         )
                     )
-<<<<<<< HEAD
-                    cardsDepartaments.add(
-=======
+
                     cardsDepartamentos.add(
->>>>>>> 5ccf9c5
+
                         CardDepartamento(
                             "Oruro",
                             departamentosInfo.confirmados[0].dep.oruro,
                             (departamentosInfo.confirmados[0].dep.oruro - departamentosInfo.confirmados[2].dep.oruro)
                         )
                     )
-<<<<<<< HEAD
-                    cardsDepartaments.add(
-=======
+
                     cardsDepartamentos.add(
->>>>>>> 5ccf9c5
+
                         CardDepartamento(
                             "Potosi",
                             departamentosInfo.confirmados[0].dep.potosí,
                             (departamentosInfo.confirmados[0].dep.potosí - departamentosInfo.confirmados[2].dep.potosí)
                         )
                     )
-<<<<<<< HEAD
-                    cardsDepartaments.add(
-=======
+
                     cardsDepartamentos.add(
->>>>>>> 5ccf9c5
+
                         CardDepartamento(
                             "Cochabamba",
                             departamentosInfo.confirmados[0].dep.cochabamba,
                             (departamentosInfo.confirmados[0].dep.cochabamba - departamentosInfo.confirmados[2].dep.cochabamba)
                         )
                     )
-<<<<<<< HEAD
-                    cardsDepartaments.add(
-                        CardDepartamento(
-                            "Tarija",
-                            departamentosInfo.confirmados[0].dep.tarija,
-                            departamentosInfo.confirmados[0].dep.tarija - departamentosInfo.confirmados[2].dep.tarija
-                        )
-                    )
-                    cardsDepartaments.add(
-=======
+
                     cardsDepartamentos.add(
                         CardDepartamento(
                             "Tarija",
@@ -220,7 +200,7 @@ class Nacional : Fragment() {
                         )
                     )
                     cardsDepartamentos.add(
->>>>>>> 5ccf9c5
+
                         CardDepartamento(
                             "Chuquisaca",
                             departamentosInfo.confirmados[0].dep.chuquisaca,
@@ -228,33 +208,26 @@ class Nacional : Fragment() {
                         )
                     )
 
-<<<<<<< HEAD
-                    cardsDepartaments.add(
-=======
                     cardsDepartamentos.add(
->>>>>>> 5ccf9c5
+
                         CardDepartamento(
                             "Santa Cruz",
                             departamentosInfo.confirmados[0].dep.santa_cruz,
                             (departamentosInfo.confirmados[0].dep.santa_cruz - departamentosInfo.confirmados[2].dep.santa_cruz)
                         )
                     )
-<<<<<<< HEAD
-                    cardsDepartaments.add(
-=======
+
                     cardsDepartamentos.add(
->>>>>>> 5ccf9c5
+
                         CardDepartamento(
                             "Beni",
                             departamentosInfo.confirmados[0].dep.beni,
                             (departamentosInfo.confirmados[0].dep.beni - departamentosInfo.confirmados[2].dep.beni)
                         )
                     )
-<<<<<<< HEAD
-                    cardsDepartaments.add(
-=======
+
                     cardsDepartamentos.add(
->>>>>>> 5ccf9c5
+
                         CardDepartamento(
                             "Pando",
                             departamentosInfo.confirmados[0].dep.pando,
@@ -262,19 +235,12 @@ class Nacional : Fragment() {
                         )
                     )
                     // Ordenando la lista para poder ver la cifra mas alta por dia
-<<<<<<< HEAD
-                    val sortedList = cardsDepartaments.sortedByDescending { it.cantidad_por_dia }
-                    // aqui es donde se toma el array de departamentos par mostrarlos
-                    val adapter =
-                        AdaptadorDepartamento(
-                            activity!!.applicationContext,
-                            ArrayList(sortedList)
-                        )
-=======
+
                     val sortedList = cardsDepartamentos.sortedByDescending { it.cantidad_por_dia }
 
-                    val adapter = AdaptadorDepartamento(activity!!.applicationContext,  ArrayList(sortedList))
->>>>>>> 5ccf9c5
+                    val adapter =
+                        AdaptadorDepartamento(activity!!.applicationContext, ArrayList(sortedList))
+
 
                     lvDepartamentos.adapter = adapter
 
@@ -291,7 +257,7 @@ class Nacional : Fragment() {
         queue.add(request)
     }
 
-    fun isNetworkConnected(): Boolean {
+    private fun isNetworkConnected(): Boolean {
         val conectivytiManager =
             activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val netWorkInfo = conectivytiManager.activeNetworkInfo

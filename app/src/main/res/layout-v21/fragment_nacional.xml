@@ -8,20 +8,24 @@
 
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/cardsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/backgroud_main"
             android:orientation="vertical"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:paddingBottom="40dp">
+            android:paddingBottom="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tvc19title"
@@ -61,14 +65,22 @@
             android:layout_gravity="center"
             android:indeterminate="true"
             android:indeterminateTint="@color/colorPrimary"
-            android:indeterminateTintMode="src_atop" />
+            android:indeterminateTintMode="src_atop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardsContainer" />
 
         <ListView
             android:id="@+id/lvDepartamentos"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardsContainer" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>

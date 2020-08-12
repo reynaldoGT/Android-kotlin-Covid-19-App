@@ -32,7 +32,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/titleTotalCases"
-        android:text="0000" />
+        android:text="@string/ceros" />
 
     <TextView
         android:id="@+id/TitlenewCases"
@@ -49,9 +49,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/titleTotalCases"
         android:layout_marginLeft="16dp"
+
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/titleTotalCases"
-        android:text="0000" />
+        android:text="@string/ceros" />
 
     <TextView
         android:id="@+id/TitleTotalDeath"
@@ -70,7 +71,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/titleTotalCases"
-        android:text="0000" />
+        android:text="@string/ceros" />
 
     <TextView
         android:id="@+id/TitleTotalRecovery"
@@ -89,7 +90,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/TitleTotalRecovery"
-        android:text="0000" />
+        android:text="@string/ceros" />
 
 
     <TextView
@@ -109,7 +110,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/TitleTotalRecoveryPercentaje"
-        android:text="0000" />
+        android:text="@string/ceros" />
 
 
 </RelativeLayout>

@@ -13,7 +13,8 @@
 
 
     <string name="nointernet">No hay Internet</string>
-
+    <string name="ceros">0000</string>
+    <string name="casos_en_el_mundo">Casos en el Mundo</string>
 
 
 </resources>

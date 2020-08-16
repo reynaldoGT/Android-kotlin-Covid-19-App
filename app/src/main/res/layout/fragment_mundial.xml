@@ -7,11 +7,13 @@
     android:layout_marginTop="?attr/actionBarSize"
     tools:context=".Fragments.Mundial">
 
+
     <LinearLayout
         android:id="@+id/mundialMainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
 
         <LinearLayout
 

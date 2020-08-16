@@ -1,25 +1,30 @@
 package com.example.covid19ciudados.information
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.covid19ciudados.Fragments.Mundial
 import com.example.covid19ciudados.R
 import com.example.covid19ciudados.information.SharedCode.Companion.datoProcesado
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AdapterMundiData(items: ArrayList<Country>) :
-    RecyclerView.Adapter<AdapterMundiData.ViewHolder>() {
+    RecyclerView.Adapter<AdapterMundiData.ViewHolder>(), Filterable {
 
     //? Properties
     var items: ArrayList<Country>? = null
     var viewHolder: ViewHolder? = null
+    var copiaItems: ArrayList<Country>? = null
 
     // constructor
     init {
         this.items = items
-
+        this.copiaItems = items
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,10 +47,31 @@ class AdapterMundiData(items: ArrayList<Country>) :
         holder.newCases?.text = datoProcesado(item.NewConfirmed)
         holder.allDeath?.text = datoProcesado(item.TotalDeaths)
         holder.recovery?.text = datoProcesado(item.TotalRecovered)
-        holder.recoverPercentaje?.text = ((item.TotalRecovered *100)/item.TotalConfirmed).toString() + " %"
+        holder.recoverPercentaje?.text =
+            ((item.TotalRecovered * 100) / item.TotalConfirmed).toString() + " %"
 
     }
 
+
+    fun filtrar(str: String) {
+
+        items?.clear()
+        if (str.isEmpty()) {
+            items = copiaItems
+            notifyDataSetChanged()
+            return
+        }
+        var busqueda = str
+
+        busqueda = busqueda.toLowerCase()
+        for (item in copiaItems!!) {
+            val nombre = item.Country.toLowerCase()
+            if (nombre.contains(busqueda)) {
+                items?.add(item)
+            }
+        }
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(vista: View) : RecyclerView.ViewHolder(vista) {
         var vista = vista
@@ -68,4 +94,37 @@ class AdapterMundiData(items: ArrayList<Country>) :
 
         }
     }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                Log.d("texto para buscar", charSearch)
+                if (charSearch.isEmpty()) {
+                    copiaItems = items
+                } else {
+                    val resultList = ArrayList<Country>()
+                    for (row in items!!) {
+                        if (row.Country.toLowerCase(Locale.ROOT)
+                                .contains(charSearch.toLowerCase(Locale.ROOT))
+                        ) {
+                            resultList.add(row)
+                        }
+                    }
+                    copiaItems = resultList
+                }
+                val filterResult = FilterResults()
+                filterResult.values = copiaItems
+                return filterResult
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                @Suppress("UNCHECKED_CAST")
+                copiaItems = results?.values as ArrayList<Country>
+                notifyDataSetChanged()
+            }
+
+        }
+    }
+
 }

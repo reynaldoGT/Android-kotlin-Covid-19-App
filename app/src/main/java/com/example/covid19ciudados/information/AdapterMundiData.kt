@@ -9,7 +9,7 @@ import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid19ciudados.R
-import com.example.covid19ciudados.information.SharedCode.Companion.datoProcesado
+import com.example.covid19ciudados.information.SharedCode.Companion.dataProcessed
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -43,10 +43,10 @@ class AdapterMundiData(items: ArrayList<Country>) :
 
         holder.countryName?.text = item?.Country!!
 
-        holder.totalCases?.text = datoProcesado(item.TotalConfirmed)
-        holder.newCases?.text = datoProcesado(item.NewConfirmed)
-        holder.allDeath?.text = datoProcesado(item.TotalDeaths)
-        holder.recovery?.text = datoProcesado(item.TotalRecovered)
+        holder.totalCases?.text = dataProcessed(item.TotalConfirmed)
+        holder.newCases?.text = dataProcessed(item.NewConfirmed)
+        holder.allDeath?.text = dataProcessed(item.TotalDeaths)
+        holder.recovery?.text = dataProcessed(item.TotalRecovered)
         holder.recoverPercentaje?.text =
             ((item.TotalRecovered * 100) / item.TotalConfirmed).toString() + " %"
 

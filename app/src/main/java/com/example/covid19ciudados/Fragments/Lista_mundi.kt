@@ -12,12 +12,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.covid19ciudados.R
 import com.example.covid19ciudados.information.AdapterMundiData
-import com.example.covid19ciudados.information.GlobalInfomation
+import com.example.covid19ciudados.information.GlobalInformation
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_lista_mundi.*
 
@@ -26,9 +25,9 @@ class Lista_mundi : AppCompatActivity() {
 
     var toolbar: Toolbar? = null
 
-    var listaCountries: RecyclerView? = null
-    var adaptadorMundi: AdapterMundiData? = null
-    var layout_Manager: RecyclerView.LayoutManager? = null
+    var listCountries: RecyclerView? = null
+    var adapterMundi: AdapterMundiData? = null
+    var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,23 +51,23 @@ class Lista_mundi : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
 
         val request =
-            StringRequest(Request.Method.GET, url, Response.Listener<String> { response ->
+            StringRequest(Request.Method.GET, url, { response ->
                 try {
 
                     //usando la libreria gson para parsear
                     val gson = Gson()
-                    val c19 = gson.fromJson(response, GlobalInfomation::class.java)
+                    val c19 = gson.fromJson(response, GlobalInformation::class.java)
 
                     val sortedList = c19.Countries.sortedByDescending { it.TotalConfirmed }
 
-                    listaCountries?.setHasFixedSize(true)
-                    adaptadorMundi = AdapterMundiData(ArrayList(sortedList))
-                    layout_Manager = LinearLayoutManager(this)
+                    listCountries?.setHasFixedSize(true)
+                    adapterMundi = AdapterMundiData(ArrayList(sortedList))
+                    layoutManager = LinearLayoutManager(this)
 
-                    listaCountries = findViewById(R.id.recyclerViewMundi)
-                    listaCountries?.layoutManager = layout_Manager
+                    listCountries = findViewById(R.id.recyclerViewMundi)
+                    listCountries?.layoutManager = layoutManager
 
-                    listaCountries?.adapter = adaptadorMundi
+                    listCountries?.adapter = adapterMundi
 
                     // para detener el circular progress bar
 
@@ -77,7 +76,7 @@ class Lista_mundi : AppCompatActivity() {
                 } catch (e: Exception) {
                     Log.d("error en la peticion", e.message.toString())
                 }
-            }, Response.ErrorListener { error ->
+            }, { error ->
                 Log.d("Error en el listener", error.message.toString())
 
             })
@@ -101,7 +100,7 @@ class Lista_mundi : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                adaptadorMundi?.filter!!.filter(newText)
+                adapterMundi?.filter!!.filter(newText)
                 return false
             }
 

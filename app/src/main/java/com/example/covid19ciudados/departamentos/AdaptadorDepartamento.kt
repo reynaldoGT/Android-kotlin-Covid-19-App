@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 
 import com.example.covid19ciudados.R
-import com.example.covid19ciudados.information.SharedCode.Companion.datoProcesado
+import com.example.covid19ciudados.information.SharedCode.Companion.dataProcessed
 
 class AdaptadorDepartamento(var context: Context, items: ArrayList<CardDepartamento>) :
     BaseAdapter() {
@@ -33,8 +33,8 @@ class AdaptadorDepartamento(var context: Context, items: ArrayList<CardDepartame
         val item = getItem(position) as CardDepartamento
 
         holder?.nombre?.text = item.nombre_departamento
-        holder?.cantidad_total?.text = datoProcesado(item.cantidad_total)
-        holder?.cantidad_dia_departamento?.text = datoProcesado(item.cantidad_por_dia)
+        holder?.cantidad_total?.text = dataProcessed(item.cantidad_total)
+        holder?.cantidad_dia_departamento?.text = dataProcessed(item.cantidad_por_dia)
 
 
         return vista!!

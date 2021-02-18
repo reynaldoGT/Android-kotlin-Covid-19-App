@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    android:paddingLeft="16dp"
+    android:layout_marginBottom="8dp"
     android:paddingRight="16dp">
 
     <TextView
@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:text="Country"
         android:textAllCaps="true"
-        android:textColor="@color/text_titleColor" />
+        android:textColor="@color/text_titleColor"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/titleTotalCases"

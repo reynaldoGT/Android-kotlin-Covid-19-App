@@ -1,7 +1,6 @@
 package com.example.covid19ciudados
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -12,10 +11,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.covid19ciudados.Fragments.Inicio
 import com.example.covid19ciudados.Fragments.Lista_mundi
 import com.example.covid19ciudados.Fragments.Mundial
-import com.example.covid19ciudados.Fragments.Nacional
+import com.example.covid19ciudados.Fragments.National
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // para mostra el fragmento de inicio de una
-        showselecttFragmet(Inicio())
+        showselectedFragmet(Inicio())
 
         toolbar = findViewById(R.id.toolba)
         toolbar?.title = "Prevenciones Covid-19 "
@@ -35,15 +32,15 @@ class MainActivity : AppCompatActivity() {
         botonNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.page_1 -> {
-                    showselecttFragmet(Inicio())
+                    showselectedFragmet(Inicio())
                     true
                 }
                 R.id.page_2 -> {
-                    showselecttFragmet(Mundial())
+                    showselectedFragmet(Mundial())
                     true
                 }
                 R.id.page_3 -> {
-                    showselecttFragmet(Nacional())
+                    showselectedFragmet(National())
                     true
                 }
                 else -> false
@@ -51,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showselecttFragmet(fragment: Fragment) {
+    private fun showselectedFragmet(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()

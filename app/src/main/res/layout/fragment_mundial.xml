@@ -41,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:horizontalSpacing="16dp"
+
                 android:numColumns="2"
                 android:verticalSpacing="16dp" />
 
@@ -67,6 +68,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewMundi"
             android:layout_width="match_parent"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:layout_height="wrap_content"
             android:padding="8dp" />
     </LinearLayout>

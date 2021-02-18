@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Ciudados Covid-19 </string>
+    <string name="app_name">Cuidados Covid-19 </string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--Strigns del incio-->
     <string name="title"><b>Covid-19</b> </string>

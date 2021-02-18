@@ -35,7 +35,7 @@ class Inicio : Fragment(), View.OnClickListener {
 
         viewPager2 = view.findViewById(R.id.viewPagerImageSlider)
 
-        var sliderItem: ArrayList<SliderItem> = ArrayList()
+        val sliderItem: ArrayList<SliderItem> = ArrayList()
 
         sliderItem.add(SliderItem(R.drawable.stayhome, "Quédate en casa"))
         sliderItem.add(SliderItem(R.drawable.cough, "Tapate al toser"))

@@ -10,7 +10,7 @@ class SharedCode {
         const val total_death: String = "Muertes"
         const val new_cases: String = "Nuevos Casos"
 
-        fun datoProcesado(into: Int): String {
+        fun dataProcessed(into: Int): String {
             val dec = DecimalFormat("#,###")
             return (dec.format(into)).toString()
                 .replace(',', '.')

@@ -1,11 +1,8 @@
 package com.example.covid19ciudados.Fragments
 
-import android.app.SearchManager
 import android.content.Context
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 
 
@@ -15,25 +12,15 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat.getSystemService
 
 
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import com.example.covid19ciudados.Adaptador
-import com.example.covid19ciudados.Card
-import com.example.covid19ciudados.MainActivity
-import com.example.covid19ciudados.R
+import com.example.covid19ciudados.*
 import com.example.covid19ciudados.information.AdapterMundiData
-import com.example.covid19ciudados.information.GlobalInfomation
-import com.example.covid19ciudados.information.SharedCode.Companion.datoProcesado
+import com.example.covid19ciudados.information.GlobalInformation
+import com.example.covid19ciudados.information.SharedCode.Companion.dataProcessed
 import com.example.covid19ciudados.information.SharedCode.Companion.new_cases
 import com.example.covid19ciudados.information.SharedCode.Companion.total_cases
 import com.example.covid19ciudados.information.SharedCode.Companion.total_death
@@ -44,10 +31,12 @@ import kotlinx.android.synthetic.main.fragment_mundial.*
 
 class Mundial : Fragment() {
 
+    private var network: Network? = null
 
-    var listaCountries: RecyclerView? = null
-    var adaptadorMundi: AdapterMundiData? = null
-    var layout_Manager: RecyclerView.LayoutManager? = null
+
+    var listCountries: RecyclerView? = null
+    var adapterMundiData: AdapterMundiData? = null
+    var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,10 +46,10 @@ class Mundial : Fragment() {
 
         var view: View? = null
 
+        network = Network(activity as AppCompatActivity)
 
 
-
-        if (!isNetworkConnected()) {
+        if (!network!!.hayRed()) {
 
 
             view = inflater.inflate(R.layout.no_internet, container, false)
@@ -80,7 +69,6 @@ class Mundial : Fragment() {
 
         } else {
             view = inflater.inflate(R.layout.fragment_mundial, container, false)
-
             consultData()
 
         }
@@ -92,78 +80,70 @@ class Mundial : Fragment() {
 
         val url =
             "https://api.covid19api.com/summary"
-        val queue = Volley.newRequestQueue(activity?.applicationContext)
+        network?.httpGetRequest(activity!!.applicationContext, url, object : HttpResponse {
+            override fun httpResponseSuccess(response: String) {
+                //usando la libreria gson para parsear
+                val gson = Gson()
+                val c19 = gson.fromJson(response, GlobalInformation::class.java)
 
-        val request =
-            StringRequest(Request.Method.GET, url, Response.Listener<String> { response ->
-                try {
-
-                    //usando la libreria gson para parsear
-                    val gson = Gson()
-                    val c19 = gson.fromJson(response, GlobalInfomation::class.java)
-
-
-                    // Log.d("Ciudad", c19.Global.TotalConfirmed.toString())
-                    val cards = ArrayList<Card>()
-                    //c19.Global.TotalConfirmed.toString()
-                    cards.add(
-                        Card(
-                            total_cases,
-                            datoProcesado(c19.Global.TotalConfirmed)
-                        )
+                // Log.d("Ciudad", c19.Global.TotalConfirmed.toString())
+                val cards = ArrayList<Card>()
+                //c19.Global.TotalConfirmed.toString()
+                cards.add(
+                    Card(
+                        total_cases,
+                        dataProcessed(c19.Global.TotalConfirmed)
                     )
-                    cards.add(
-                        Card(
-                            total_recovered,
-                            datoProcesado(c19.Global.TotalRecovered)
-                        )
+                )
+                cards.add(
+                    Card(
+                        total_recovered,
+                        dataProcessed(c19.Global.TotalRecovered)
                     )
-                    cards.add(
-                        Card(
-                            total_death,
-                            datoProcesado(c19.Global.TotalDeaths)
-                        )
+                )
+                cards.add(
+                    Card(
+                        total_death,
+                        dataProcessed(c19.Global.TotalDeaths)
                     )
-                    cards.add(
-                        Card(
-                            new_cases,
-                            datoProcesado(c19.Global.NewConfirmed)
-                        )
+                )
+                cards.add(
+                    Card(
+                        new_cases,
+                        dataProcessed(c19.Global.NewConfirmed)
                     )
-                    //val grid = view?.findViewById<GridView>(R.id.gridInfo)
-                    //tvFecha?.text = c19.Date
-                    tvFecha?.text = "Datos en las últimas 24 horas"
+                )
+                //val grid = view?.findViewById<GridView>(R.id.gridInfo)
+                //tvFecha?.text = c19.Date
+                tvFecha?.text = "Datos en las últimas 24 horas"
 
-                    val adaptor = Adaptador(activity!!.applicationContext, cards)
+                val adaptor = Adaptador(activity!!.applicationContext, cards)
 
-                    val sortedList = c19.Countries.sortedByDescending { it.TotalConfirmed }
+                val sortedList = c19.Countries.sortedByDescending { it.TotalConfirmed }
 
 
-                    gridInfo?.adapter = adaptor
+                gridInfo?.adapter = adaptor
 
-                    listaCountries?.setHasFixedSize(true)
-                    adaptadorMundi = AdapterMundiData(ArrayList(sortedList))
-                    layout_Manager = LinearLayoutManager(view?.context)
+                listCountries?.setHasFixedSize(true)
+                adapterMundiData = AdapterMundiData(ArrayList(sortedList))
+                layoutManager = LinearLayoutManager(view?.context)
 
-                    listaCountries = view?.findViewById(R.id.recyclerViewMundi)
-                    listaCountries?.layoutManager = layout_Manager
+                listCountries = view?.findViewById(R.id.recyclerViewMundi)
+                listCountries?.layoutManager = layoutManager
 
-                    listaCountries?.adapter = adaptadorMundi
+                listCountries?.adapter = adapterMundiData
 
-                    // para detener el circular progress bar
+                // para detener el circular progress bar
 
-                    view?.findViewById<ProgressBar>(R.id.progressBar)!!.visibility = View.GONE
+                view?.findViewById<ProgressBar>(R.id.progressBar)!!.visibility = View.GONE
 
-                } catch (e: Exception) {
-                    Log.d("error en la peticion", e.message.toString())
-                }
-            }, Response.ErrorListener { error ->
-                Log.d("Error en el listener", error.message.toString())
 
-            })
-        queue.add(request)
+            }
+
+        })
 
     }
+
 
     private fun isNetworkConnected(): Boolean {
         val conectivityManager =
@@ -171,8 +151,6 @@ class Mundial : Fragment() {
         val netWorkInfo = conectivityManager.activeNetworkInfo
         return netWorkInfo != null && netWorkInfo.isConnected
     }
-
-
 
 
 }

@@ -19,7 +19,6 @@ class Network(var activity: AppCompatActivity) {
     }
 
     fun httpGetRequest(context: Context, url: String, httpResponse: HttpResponse) {
-        Log.d("Consulta", "haciendo la consulta2")
 
         if (hayRed()) {
             val queue = Volley.newRequestQueue(context)

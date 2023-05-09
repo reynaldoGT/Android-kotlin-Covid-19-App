@@ -17,6 +17,7 @@ import com.example.covid19ciudados.ClickListener
 import com.example.covid19ciudados.R
 import com.example.covid19ciudados.SliderApapter
 import com.example.covid19ciudados.SliderItem
+import com.google.firebase.iid.FirebaseInstanceId
 import java.lang.Math.abs
 
 
@@ -29,6 +30,8 @@ class Inicio : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
 
+        notification()
+
         val view = inflater.inflate(R.layout.fragment_inicio, container, false)
         //Funciones para que los botones funcionen en un fragment
         buttons_functions(view)
@@ -37,16 +40,49 @@ class Inicio : Fragment(), View.OnClickListener {
 
         val sliderItem: ArrayList<SliderItem> = ArrayList()
 
-        sliderItem.add(SliderItem(R.drawable.stayhome, "Quédate en casa"))
-        sliderItem.add(SliderItem(R.drawable.cough, "Tapate al toser"))
-        sliderItem.add(SliderItem(R.drawable.antibacterialgel, "Usa gel antibacterial"))
-        sliderItem.add(SliderItem(R.drawable.distance, "Toma distancia social"))
-        sliderItem.add(SliderItem(R.drawable.handshake, "No saludes con la mano"))
-        sliderItem.add(SliderItem(R.drawable.greeting, "Trata de saluda con los codos"))
-        sliderItem.add(SliderItem(R.drawable.facemask, "Usa barbijo o mascarilla"))
-        sliderItem.add(SliderItem(R.drawable.washinghands, "Lavate las manos frecuentemente"))
-        sliderItem.add(SliderItem(R.drawable.hearse, "Si te sientes mal pide ayuda"))
-        sliderItem.add(SliderItem(R.drawable.mask, "Sal siempre con barbijo o mascarilla"))
+        sliderItem.add(SliderItem(R.drawable.stayhome, getString(R.string.stay_home)))
+        sliderItem.add(
+            SliderItem(
+                R.drawable.cough,
+                getString(R.string.cover_yourself_when_coughing)
+            )
+        )
+        sliderItem.add(
+            SliderItem(
+                R.drawable.antibacterialgel,
+                getString(R.string.use_antibacterial_gel)
+            )
+        )
+        sliderItem.add(SliderItem(R.drawable.distance, getString(R.string.take_social_distance)))
+        sliderItem.add(SliderItem(R.drawable.handshake, getString(R.string.don_t_wave)))
+        try {
+            sliderItem.add(
+                SliderItem(
+                    R.drawable.greeting,
+                    getString(R.string.try_to_wave_your_elbows)
+                )
+            )
+        } catch (e: Exception) {
+        }
+        sliderItem.add(SliderItem(R.drawable.facemask, getString(R.string.wear_a_or_mask)))
+        sliderItem.add(
+            SliderItem(
+                R.drawable.washinghands,
+                getString(R.string.wash_your_hands_frequently)
+            )
+        )
+        sliderItem.add(
+            SliderItem(
+                R.drawable.hearse,
+                getString(R.string.If_you_feel_bad_ask_for_help)
+            )
+        )
+        sliderItem.add(
+            SliderItem(
+                R.drawable.mask,
+                getString(R.string.always_go_out_with_a_chinstrap_or_mask)
+            )
+        )
 
         viewPager2?.adapter = SliderApapter(sliderItem, viewPager2!!, object : ClickListener {
             override fun onclick(vista: View, index: Int) {
@@ -65,11 +101,11 @@ class Inicio : Fragment(), View.OnClickListener {
         viewPager2?.offscreenPageLimit = 3
         viewPager2?.getChildAt(0)?.overScrollMode = RecyclerView.OVER_SCROLL_ALWAYS
 
-        var compositePageTransformer = CompositePageTransformer()
+        val compositePageTransformer = CompositePageTransformer()
         compositePageTransformer.addTransformer(MarginPageTransformer(40))
         compositePageTransformer.addTransformer(ViewPager2.PageTransformer
         { page, position ->
-            var r = 1 - abs(position)
+            val r = 1 - abs(position)
             page.scaleY = 0.85f + r * 0.15f
         })
 
@@ -102,6 +138,14 @@ class Inicio : Fragment(), View.OnClickListener {
                 val intent = Intent(Intent.ACTION_SENDTO, uri)
                 intent.putExtra("sms_body", "Necesito una ambulancia em ")
                 startActivity(intent)
+            }
+        }
+    }
+
+    private fun notification() {
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
+            it.result?.token.let {
+                println("This is the id phone ${it}")
             }
         }
     }

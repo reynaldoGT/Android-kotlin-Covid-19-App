@@ -17,5 +17,19 @@
     <string name="casos_en_el_mundo">Casos en el Mundo</string>
     <string name="titulo_search">buscar pais</string>
 
+    <string name="stay_home">"Quédate en casa"</string>
+    <string name="cover_yourself_when_coughing">"Tapate al toser"</string>
+    <string name="use_antibacterial_gel">"Usa gel antibacterial"</string>
+    <string name="take_social_distance">Toma Distancia Social</string>
+    <string name="don_t_wave">No saludes con la mano</string>
+    <string name="If_you_feel_bad_ask_for_help">Si te sientes mal pide ayuda</string>
+    <string name="try_to_wave_your_elbows">Trata de saluda con los codos</string>
+    <string name="wear_a_or_mask">Usa barbijo o mascarilla</string>
+    <string name="wash_your_hands_frequently">Lavate las manos frecuentemente</string>
+    <string name="always_go_out_with_a_chinstrap_or_mask">Sal siempre con barbijo o mascarilla</string>
+
+
+
+
 
 </resources>

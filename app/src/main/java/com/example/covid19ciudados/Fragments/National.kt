@@ -80,7 +80,7 @@ class National : Fragment() {
                 val c19 = gson.fromJson(response, GlobalInformation::class.java)
 
                 val cards = ArrayList<Card>()
-                Log.d("ArraysPaus", c19.Countries[20].TotalConfirmed.toString())
+
 
                 cards.add(
                     Card(

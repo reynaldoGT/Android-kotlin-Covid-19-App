@@ -18,21 +18,23 @@
         <LinearLayout
             android:id="@+id/infoContainer"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
-            android:background="@drawable/backgroud_main"
+
+            android:background="@drawable/background_main"
             android:orientation="vertical"
-            android:paddingBottom="25dp"
+            android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/ttvTitulo"
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+
+
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="20dp"
                 android:text="@string/title"
@@ -43,9 +45,7 @@
                 android:id="@+id/tvsubTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
 
-                android:layout_marginLeft="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/sick"
                 android:textColor="#fff"
@@ -55,8 +55,7 @@
                 android:id="@+id/tvInfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+
                 android:layout_marginBottom="16dp"
                 android:lineHeight="23sp"
                 android:text="@string/parrafo"
@@ -74,11 +73,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/border_red"
                     android:drawableStart="@drawable/ic_call"
-                    android:drawableLeft="@drawable/ic_call"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="@string/call"
@@ -94,7 +91,6 @@
                     android:layout_weight="1"
                     android:background="@drawable/border_blue"
                     android:drawableStart="@drawable/ic_message"
-                    android:drawableLeft="@drawable/ic_message"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
 
@@ -111,7 +107,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/prevenciones"

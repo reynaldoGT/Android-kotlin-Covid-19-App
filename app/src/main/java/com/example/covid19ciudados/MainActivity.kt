@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // para mostra el fragmento de inicio de una
-        showselectedFragmet(Inicio())
+        showSelectedFragment(Inicio())
 
         toolbar = findViewById(R.id.toolba)
-        toolbar?.title = "Prevenciones Covid-19 "
+        toolbar?.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
 
 
@@ -32,15 +32,15 @@ class MainActivity : AppCompatActivity() {
         botonNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.page_1 -> {
-                    showselectedFragmet(Inicio())
+                    showSelectedFragment(Inicio())
                     true
                 }
                 R.id.page_2 -> {
-                    showselectedFragmet(Mundial())
+                    showSelectedFragment(Mundial())
                     true
                 }
                 R.id.page_3 -> {
-                    showselectedFragmet(National())
+                    showSelectedFragment(National())
                     true
                 }
                 else -> false
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showselectedFragmet(fragment: Fragment) {
+    private fun showSelectedFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()

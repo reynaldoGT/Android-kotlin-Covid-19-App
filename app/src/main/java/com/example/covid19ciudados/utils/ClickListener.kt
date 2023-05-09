@@ -1,4 +1,4 @@
-package com.example.covid19ciudados
+package com.example.covid19ciudados.utils
 
 import android.view.View
 

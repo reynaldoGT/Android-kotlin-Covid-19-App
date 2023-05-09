@@ -1,4 +1,4 @@
-package com.example.covid19ciudados.Fragments
+package com.example.covid19ciudados.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -13,15 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.example.covid19ciudados.ClickListener
+import com.example.covid19ciudados.utils.ClickListener
 import com.example.covid19ciudados.R
-import com.example.covid19ciudados.SliderApapter
-import com.example.covid19ciudados.SliderItem
+import com.example.covid19ciudados.adapters.SliderAdapter
+import com.example.covid19ciudados.models.SliderItem
 import com.google.firebase.iid.FirebaseInstanceId
 import java.lang.Math.abs
 
 
-class Inicio : Fragment(), View.OnClickListener {
+class HomeFragment : Fragment(), View.OnClickListener {
 
     private var viewPager2: ViewPager2? = null
     override fun onCreateView(
@@ -84,7 +84,7 @@ class Inicio : Fragment(), View.OnClickListener {
             )
         )
 
-        viewPager2?.adapter = SliderApapter(sliderItem, viewPager2!!, object : ClickListener {
+        viewPager2?.adapter = SliderAdapter(sliderItem, viewPager2!!, object : ClickListener {
             override fun onclick(vista: View, index: Int) {
                 Toast.makeText(
                     activity?.applicationContext,

@@ -1,4 +1,4 @@
-package com.example.covid19ciudados.Fragments
+package com.example.covid19ciudados.fragments
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -10,7 +10,6 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -19,23 +18,27 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid19ciudados.*
+import com.example.covid19ciudados.adapters.Adapter
+import com.example.covid19ciudados.models.Card
 import com.example.covid19ciudados.databinding.FragmentMundialBinding
-import com.example.covid19ciudados.information.AdapterMundiData
-import com.example.covid19ciudados.information.GlobalInformation
-import com.example.covid19ciudados.information.SharedCode.Companion.dataProcessed
-import com.example.covid19ciudados.information.SharedCode.Companion.new_cases
-import com.example.covid19ciudados.information.SharedCode.Companion.total_cases
-import com.example.covid19ciudados.information.SharedCode.Companion.total_death
-import com.example.covid19ciudados.information.SharedCode.Companion.total_recovered
+import com.example.covid19ciudados.adapters.MundiDataAdapter
+import com.example.covid19ciudados.models.GlobalInformation
+import com.example.covid19ciudados.utils.HttpResponse
+import com.example.covid19ciudados.utils.Network
+import com.example.covid19ciudados.utils.SharedCode.Companion.dataProcessed
+import com.example.covid19ciudados.utils.SharedCode.Companion.new_cases
+import com.example.covid19ciudados.utils.SharedCode.Companion.total_cases
+import com.example.covid19ciudados.utils.SharedCode.Companion.total_death
+import com.example.covid19ciudados.utils.SharedCode.Companion.total_recovered
 import com.google.gson.Gson
 
 
-class Mundial : Fragment() {
+class MundialFragment : Fragment() {
 
     private var network: Network? = null
 
     var listCountries: RecyclerView? = null
-    var adapterMundiData: AdapterMundiData? = null
+    var adapterMundiData: MundiDataAdapter? = null
     var layoutManager: RecyclerView.LayoutManager? = null
     private var _binding: FragmentMundialBinding? = null
     private val binding get() = _binding!!
@@ -117,7 +120,7 @@ class Mundial : Fragment() {
                 //tvFecha?.text = c19.Date
                 binding.tvFecha?.text = "Datos en las últimas 24 horas"
 
-                val adaptor = Adaptador(activity!!.applicationContext, cards)
+                val adaptor = Adapter(activity!!.applicationContext, cards)
 
                 val sortedList = c19.Countries.sortedByDescending { it.TotalConfirmed }
 
@@ -125,7 +128,7 @@ class Mundial : Fragment() {
                 binding.gridInfo.adapter = adaptor
 
                 listCountries?.setHasFixedSize(true)
-                adapterMundiData = AdapterMundiData(ArrayList(sortedList))
+                adapterMundiData = MundiDataAdapter(ArrayList(sortedList))
                 layoutManager = LinearLayoutManager(view?.context)
 
                 listCountries = view?.findViewById(R.id.recyclerViewMundi)

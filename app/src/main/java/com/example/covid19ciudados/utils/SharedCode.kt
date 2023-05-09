@@ -1,4 +1,4 @@
-package com.example.covid19ciudados.information
+package com.example.covid19ciudados.utils
 
 import java.text.DecimalFormat
 

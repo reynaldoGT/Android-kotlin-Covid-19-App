@@ -14,15 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Fragments.Lista_mundi"
-            android:parentActivityName=".MainActivity" />
+            android:name=".activities.ListaMundiActivity"
+            android:parentActivityName=".activities.MainActivity" />
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/borders" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
         </activity>
 
         <service
-            android:name=".MyFirebaseMessagingService"
+            android:name=".utils.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

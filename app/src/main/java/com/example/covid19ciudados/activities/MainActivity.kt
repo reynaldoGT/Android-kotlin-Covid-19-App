@@ -1,46 +1,44 @@
-package com.example.covid19ciudados
+package com.example.covid19ciudados.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.example.covid19ciudados.Fragments.Inicio
-import com.example.covid19ciudados.Fragments.Lista_mundi
-import com.example.covid19ciudados.Fragments.Mundial
-import com.example.covid19ciudados.Fragments.National
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.covid19ciudados.fragments.HomeFragment
+import com.example.covid19ciudados.fragments.MundialFragment
+import com.example.covid19ciudados.fragments.NationalFragment
+import com.example.covid19ciudados.R
+import com.example.covid19ciudados.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    var toolbar: Toolbar? = null
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         // para mostra el fragmento de inicio de una
-        showSelectedFragment(Inicio())
+        showSelectedFragment(HomeFragment())
 
-        toolbar = findViewById(R.id.toolba)
-        toolbar?.title = getString(R.string.app_name)
-        setSupportActionBar(toolbar)
+        binding.toolbar.title = getString(R.string.app_name)
+        setSupportActionBar(binding.toolbar)
 
-
-        val botonNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        botonNavigation.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.page_1 -> {
-                    showSelectedFragment(Inicio())
+                    showSelectedFragment(HomeFragment())
                     true
                 }
                 R.id.page_2 -> {
-                    showSelectedFragment(Mundial())
+                    showSelectedFragment(MundialFragment())
                     true
                 }
                 R.id.page_3 -> {
-                    showSelectedFragment(National())
+                    showSelectedFragment(NationalFragment())
                     true
                 }
                 else -> false
@@ -63,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_mundi -> {
-                val intent = Intent(this, Lista_mundi::class.java)
+                val intent = Intent(this, ListaMundiActivity::class.java)
                 startActivity(intent)
             }
         }

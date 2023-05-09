@@ -1,6 +1,6 @@
-package com.example.covid19ciudados.departamentos
+package com.example.covid19ciudados.models
 
-data class DepartamentosInfo (
+data class DepartamentosInfo(
     val confirmados: List<Confirmado>,
     val decesos: List<Confirmado>,
     val recuperados: List<Confirmado>,
@@ -8,12 +8,12 @@ data class DepartamentosInfo (
     val descartados: List<Confirmado>
 )
 
-data class Confirmado (
+data class Confirmado(
     val fecha: String,
     val dep: Dep
 )
 
-data class Dep (
+data class Dep(
     val la_paz: Int,
     val cochabamba: Int,
     val santa_cruz: Int,

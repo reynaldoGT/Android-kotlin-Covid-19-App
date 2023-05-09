@@ -1,4 +1,4 @@
-package com.example.covid19ciudados
+package com.example.covid19ciudados.models
 
 class Card(title: String, cantidad: String) {
     var title: String = ""

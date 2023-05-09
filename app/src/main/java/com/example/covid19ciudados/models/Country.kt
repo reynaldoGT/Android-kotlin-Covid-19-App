@@ -1,4 +1,4 @@
-package com.example.covid19ciudados.information
+package com.example.covid19ciudados.models
 
 data class Country(
     val Country: String,

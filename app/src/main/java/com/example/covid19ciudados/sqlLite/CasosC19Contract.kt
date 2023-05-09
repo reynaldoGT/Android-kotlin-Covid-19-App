@@ -6,6 +6,7 @@ class CasosC19Contract {
 
     companion object {
         val VERSION = 1
+
         class Entrada : BaseColumns {
             companion object {
                 val NOMBRE_TABLA = "casos_totales"

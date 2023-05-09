@@ -1,7 +1,6 @@
-package com.example.covid19ciudados.Fragments
+package com.example.covid19ciudados.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,23 +15,25 @@ import androidx.appcompat.app.AppCompatActivity
 
 import androidx.fragment.app.Fragment
 import com.example.covid19ciudados.*
-import com.example.covid19ciudados.databinding.FragmentMundialBinding
+import com.example.covid19ciudados.adapters.Adapter
 import com.example.covid19ciudados.databinding.FragmentNacionalBinding
-import com.example.covid19ciudados.departamentos.DepartamentosInfo
-import com.example.covid19ciudados.departamentos.AdaptadorDepartamento
+import com.example.covid19ciudados.models.DepartamentosInfo
+import com.example.covid19ciudados.adapters.DepartmentAdapter
+import com.example.covid19ciudados.models.Card
 import com.example.covid19ciudados.departamentos.CardDepartamento
-import com.example.covid19ciudados.information.GlobalInformation
-import com.example.covid19ciudados.information.SharedCode.Companion.dataProcessed
-import com.example.covid19ciudados.information.SharedCode.Companion.new_cases
-import com.example.covid19ciudados.information.SharedCode.Companion.total_cases
-import com.example.covid19ciudados.information.SharedCode.Companion.total_death
-import com.example.covid19ciudados.information.SharedCode.Companion.total_recovered
+import com.example.covid19ciudados.models.GlobalInformation
+import com.example.covid19ciudados.utils.HttpResponse
+import com.example.covid19ciudados.utils.Network
+import com.example.covid19ciudados.utils.SharedCode.Companion.dataProcessed
+import com.example.covid19ciudados.utils.SharedCode.Companion.new_cases
+import com.example.covid19ciudados.utils.SharedCode.Companion.total_cases
+import com.example.covid19ciudados.utils.SharedCode.Companion.total_death
+import com.example.covid19ciudados.utils.SharedCode.Companion.total_recovered
 import com.google.gson.Gson
 
 import kotlin.collections.ArrayList
 
-
-class National : Fragment() {
+class NationalFragment : Fragment() {
 
     private var network: Network? = null
     private var _binding: FragmentNacionalBinding? = null
@@ -118,7 +119,7 @@ class National : Fragment() {
                 binding.tvFecha?.text = "Datos en las últimas 24 horas"
 
 
-                val adaptor = Adaptador(activity!!.applicationContext, cards)
+                val adaptor = Adapter(activity!!.applicationContext, cards)
                 //? nuevos casos registrados
 
                 binding.gridInfo.adapter = adaptor
@@ -219,7 +220,7 @@ class National : Fragment() {
                     cardsDepartamentos.sortedByDescending { it.cantidad_por_dia }
 
                 val adapter =
-                    AdaptadorDepartamento(
+                    DepartmentAdapter(
                         activity!!.applicationContext,
                         ArrayList(sortedList)
                     )

@@ -1,4 +1,4 @@
-package com.example.covid19ciudados.information
+package com.example.covid19ciudados.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,13 +8,14 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.covid19ciudados.models.Country
 import com.example.covid19ciudados.R
-import com.example.covid19ciudados.information.SharedCode.Companion.dataProcessed
+import com.example.covid19ciudados.utils.SharedCode.Companion.dataProcessed
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AdapterMundiData(items: ArrayList<Country>) :
-    RecyclerView.Adapter<AdapterMundiData.ViewHolder>(), Filterable {
+class MundiDataAdapter(items: ArrayList<Country>) :
+    RecyclerView.Adapter<MundiDataAdapter.ViewHolder>(), Filterable {
 
     //? Properties
     var items: ArrayList<Country>? = null

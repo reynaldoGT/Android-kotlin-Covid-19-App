@@ -1,4 +1,4 @@
-package com.example.covid19ciudados.Fragments
+package com.example.covid19ciudados.activities
 
 import android.app.SearchManager
 import android.content.Context
@@ -8,25 +8,24 @@ import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.covid19ciudados.R
-import com.example.covid19ciudados.information.AdapterMundiData
-import com.example.covid19ciudados.information.GlobalInformation
+import com.example.covid19ciudados.models.GlobalInformation
+import com.example.covid19ciudados.adapters.MundiDataAdapter
 import com.google.gson.Gson
 import com.example.covid19ciudados.databinding.ActivityListaMundiBinding
 
 
 
-class Lista_mundi : AppCompatActivity() {
+class ListaMundiActivity : AppCompatActivity() {
 
 
     var listCountries: RecyclerView? = null
-    var adapterMundi: AdapterMundiData? = null
+    var adapterMundi: MundiDataAdapter? = null
     var layoutManager: RecyclerView.LayoutManager? = null
 
     private lateinit var binding: ActivityListaMundiBinding
@@ -63,7 +62,7 @@ class Lista_mundi : AppCompatActivity() {
                     val sortedList = c19.Countries.sortedByDescending { it.TotalConfirmed }
 
                     listCountries?.setHasFixedSize(true)
-                    adapterMundi = AdapterMundiData(ArrayList(sortedList))
+                    adapterMundi = MundiDataAdapter(ArrayList(sortedList))
                     layoutManager = LinearLayoutManager(this)
 
                     listCountries = findViewById(R.id.recyclerViewMundi)

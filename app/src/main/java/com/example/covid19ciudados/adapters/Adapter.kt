@@ -1,4 +1,4 @@
-package com.example.covid19ciudados
+package com.example.covid19ciudados.adapters
 
 import android.content.Context
 import android.graphics.Color
@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.example.covid19ciudados.models.Card
+import com.example.covid19ciudados.R
 
-class Adaptador(var context: Context, items: ArrayList<Card>) : BaseAdapter() {
+class Adapter(var context: Context, items: ArrayList<Card>) : BaseAdapter() {
     var items: ArrayList<Card>? = null
 
     init {

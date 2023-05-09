@@ -1,4 +1,4 @@
-package com.example.covid19ciudados.departamentos
+package com.example.covid19ciudados.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,9 +8,10 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 
 import com.example.covid19ciudados.R
-import com.example.covid19ciudados.information.SharedCode.Companion.dataProcessed
+import com.example.covid19ciudados.departamentos.CardDepartamento
+import com.example.covid19ciudados.utils.SharedCode.Companion.dataProcessed
 
-class AdaptadorDepartamento(var context: Context, items: ArrayList<CardDepartamento>) :
+class DepartmentAdapter(var context: Context, items: ArrayList<CardDepartamento>) :
     BaseAdapter() {
 
     var items: ArrayList<CardDepartamento>? = null
@@ -63,7 +64,6 @@ class AdaptadorDepartamento(var context: Context, items: ArrayList<CardDepartame
             cantidad_total = vista.findViewById(R.id.cantidadPorDepartamento)
             cantidad_dia_departamento = vista.findViewById(R.id.ultimosCasosDepartamento)
         }
-
 
     }
 }

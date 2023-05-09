@@ -1,4 +1,4 @@
-package com.example.covid19ciudados
+package com.example.covid19ciudados.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.covid19ciudados.utils.ClickListener
+import com.example.covid19ciudados.models.SliderItem
+import com.example.covid19ciudados.R
 import com.makeramen.roundedimageview.RoundedImageView
 
-class SliderApapter(sliderItems:ArrayList<SliderItem>,viewPager2 : ViewPager2,var listener: ClickListener)
-:RecyclerView.Adapter<SliderApapter.SliderAdapterHolder>(){
+class SliderAdapter(sliderItems:ArrayList<SliderItem>, viewPager2 : ViewPager2, var listener: ClickListener)
+:RecyclerView.Adapter<SliderAdapter.SliderAdapterHolder>(){
 
     var sliderItems: ArrayList<SliderItem>? = null
     var viewPager2 : ViewPager2 ? = null
@@ -19,9 +22,9 @@ class SliderApapter(sliderItems:ArrayList<SliderItem>,viewPager2 : ViewPager2,va
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderAdapterHolder {
-        val vista = LayoutInflater.from(parent.context).inflate(R.layout.slide_item_container, parent, false)
-        var viewHolder = SliderAdapterHolder(vista,listener)
-        return viewHolder
+        val vista = LayoutInflater.from(parent.context)
+            .inflate(R.layout.slide_item_container, parent, false)
+        return SliderAdapterHolder(vista, listener)
     }
 
     override fun getItemCount(): Int {
@@ -45,7 +48,7 @@ class SliderApapter(sliderItems:ArrayList<SliderItem>,viewPager2 : ViewPager2,va
             this.listener = listener
             vista.setOnClickListener(this)
         }
-        fun setImage(sliderItem:SliderItem){
+        fun setImage(sliderItem: SliderItem){
             imageView?.setImageResource(sliderItem.image)
         }
 

@@ -24,7 +24,7 @@
             android:paddingBottom="40dp">
 
             <TextView
-                android:id="@+id/tvc19title"
+                android:id="@+id/tv_c19_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -42,7 +42,7 @@
                 android:verticalSpacing="16dp" />
 
             <TextView
-                android:id="@+id/tvFecha"
+                android:id="@+id/tv_fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -55,14 +55,14 @@
         </LinearLayout>
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:indeterminate="true"
              />
         <ListView
-            android:id="@+id/lvDepartamentos"
+            android:id="@+id/lv_departamentos"
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:layout_marginTop="16dp" />

@@ -18,28 +18,30 @@ import com.example.covid19ciudados.R
 import com.example.covid19ciudados.information.AdapterMundiData
 import com.example.covid19ciudados.information.GlobalInformation
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_lista_mundi.*
+import com.example.covid19ciudados.databinding.ActivityListaMundiBinding
+
 
 
 class Lista_mundi : AppCompatActivity() {
 
-    var toolbar: Toolbar? = null
 
     var listCountries: RecyclerView? = null
     var adapterMundi: AdapterMundiData? = null
     var layoutManager: RecyclerView.LayoutManager? = null
 
+    private lateinit var binding: ActivityListaMundiBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lista_mundi)
+        binding = ActivityListaMundiBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        toolbar = findViewById(R.id.toolbarListaPaises)
-        toolbar?.title = "Buscar pais ..."
-        setSupportActionBar(toolbar)
+         binding.toolbarListarPaises.title = "Buscar pais ..."
+        setSupportActionBar( binding.toolbarListarPaises)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        progress_circular.visibility = View.VISIBLE
+        binding.progressCircular.visibility = View.VISIBLE
         consultData()
     }
 
@@ -72,7 +74,7 @@ class Lista_mundi : AppCompatActivity() {
                     // para detener el circular progress bar
 
                     //view?.findViewById<ProgressBar>(R.id.progressBar)!!.visibility = View.GONE
-                    progress_circular.visibility = View.GONE
+                    binding.progressCircular.visibility = View.GONE
                 } catch (e: Exception) {
                     Log.d("error en la peticion", e.message.toString())
                 }

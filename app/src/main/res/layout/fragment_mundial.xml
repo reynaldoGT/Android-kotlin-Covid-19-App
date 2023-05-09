@@ -9,14 +9,13 @@
 
 
     <LinearLayout
-        android:id="@+id/mundialMainLayout"
+        android:id="@+id/mundial_main_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_main"
@@ -26,7 +25,7 @@
             android:paddingBottom="40dp">
 
             <TextView
-                android:id="@+id/tvc19title"
+                android:id="@+id/tv_c19_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -46,7 +45,7 @@
                 android:verticalSpacing="16dp" />
 
             <TextView
-                android:id="@+id/tvFecha"
+                android:id="@+id/tv_fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -59,14 +58,14 @@
         </LinearLayout>
         <!-- Desde aqui va ir el list view para ver todos los paises -->
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:indeterminate="true" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewMundi"
+            android:id="@+id/recyclerview_mundi"
             android:layout_width="match_parent"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
